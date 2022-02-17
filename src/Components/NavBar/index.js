@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import NykaaLogo from '../../assets/img/Nykaa_Logo.png';
 import { AiOutlineSearch, AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
 import { IoBagOutline } from 'react-icons/io5';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import './style.css';
 
-function NavBar() {
+function NavBar({ toggleMenuHandler }) {
   return (
     <>
       <div className="navBarWrapper">
@@ -38,6 +39,18 @@ function NavBar() {
             <IoBagOutline className="navIcons cart" />
           </nav>
         </div>
+      </div>
+      <div className="mobileNavWrapper">
+        <Link to="/">
+          <img className="navLogoMobile" src={NykaaLogo} alt="nyka-logo" />
+        </Link>
+        <AiOutlineSearch />
+        <AiOutlineHeart />
+        <IoBagOutline />
+        <GiHamburgerMenu
+          className="hamburgerMenu"
+          onClick={toggleMenuHandler}
+        />
       </div>
     </>
   );

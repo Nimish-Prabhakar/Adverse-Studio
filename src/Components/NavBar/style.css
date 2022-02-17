@@ -93,3 +93,33 @@
 .cart:hover {
   color: black;
 }
+
+.mobileNavWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLogoMobile {
+  height: 20px;
+  cursor: pointer;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.hamburgerMenu {
+  margin-right: 25px;
+}
+
+@media only screen and (max-width: 768px) {
+  .navBarWrapper {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .mobileNavWrapper {
+    display: none;
+  }
+}
