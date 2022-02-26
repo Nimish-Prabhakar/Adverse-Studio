@@ -4,9 +4,10 @@ import NykaaLogo from '../../assets/img/Nykaa_Logo.png';
 import { AiOutlineSearch, AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
 import { IoBagOutline } from 'react-icons/io5';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import Search from '../../Components/Search';
 import './style.css';
 
-function NavBar({ toggleMenuHandler }) {
+function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
   return (
     <>
       <div className="navBarWrapper">
@@ -32,12 +33,12 @@ function NavBar({ toggleMenuHandler }) {
           </Link>
         </div>
         <div className="navIconsWrapper">
-          <nav className="iconNav">
-            <AiOutlineSearch className="navIcons search" />
+          <div className="iconNav">
             <AiOutlineUser className="navIcons user" />
             <AiOutlineHeart className="navIcons heart" />
             <IoBagOutline className="navIcons cart" />
-          </nav>
+            <Search />
+          </div>
         </div>
       </div>
       <div className="mobileNavWrapper">

@@ -1,0 +1,7 @@
+.searchInput {
+  opacity: 0.5;
+}
+
+.searchInput:active {
+  opacity: 1;
+}
