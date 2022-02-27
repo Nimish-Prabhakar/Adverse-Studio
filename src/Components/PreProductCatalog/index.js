@@ -2,7 +2,8 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import categoryLeft from '../../assets/img/categoryLeft.jpeg';
 import categoryRight from '../../assets/img/categoryRight.jpeg';
-import { Link, animateScroll as scroll } from 'react-scroll';
+import { Link } from 'react-scroll';
+import { BsDashLg } from 'react-icons/bs';
 import './style.css';
 
 const styles = {
@@ -37,8 +38,9 @@ function PreProductCatalog({ categoryName, categoryLink, imageArray }) {
               spy={true}
               smooth={true}
               offset={-100}
-              duration={500}
+              duration={1000}
             >
+              <BsDashLg style={{ paddingTop: '8px' }} />
               Kaftans
             </Link>
             <Link
@@ -47,8 +49,9 @@ function PreProductCatalog({ categoryName, categoryLink, imageArray }) {
               spy={true}
               smooth={true}
               offset={-100}
-              duration={500}
+              duration={1000}
             >
+              <BsDashLg style={{ paddingTop: '8px' }} />
               Bottoms
             </Link>
             <Link
@@ -57,8 +60,9 @@ function PreProductCatalog({ categoryName, categoryLink, imageArray }) {
               spy={true}
               smooth={true}
               offset={-100}
-              duration={500}
+              duration={1000}
             >
+              <BsDashLg style={{ paddingTop: '8px' }} />
               Tops
             </Link>
             <Link
@@ -67,8 +71,9 @@ function PreProductCatalog({ categoryName, categoryLink, imageArray }) {
               spy={true}
               smooth={true}
               offset={-100}
-              duration={500}
+              duration={1000}
             >
+              <BsDashLg style={{ paddingTop: '8px' }} />
               Dresses
             </Link>
             <Link
@@ -77,8 +82,9 @@ function PreProductCatalog({ categoryName, categoryLink, imageArray }) {
               spy={true}
               smooth={true}
               offset={-100}
-              duration={500}
+              duration={1000}
             >
+              <BsDashLg style={{ paddingTop: '8px' }} />
               Crochets
             </Link>
             <Link
@@ -87,8 +93,9 @@ function PreProductCatalog({ categoryName, categoryLink, imageArray }) {
               spy={true}
               smooth={true}
               offset={-100}
-              duration={500}
+              duration={1000}
             >
+              <BsDashLg style={{ paddingTop: '8px' }} />
               Accessories
             </Link>
           </div>

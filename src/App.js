@@ -3,6 +3,7 @@ import NavigationBar from './Pages/NavigationBar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import HomePage from './Pages/HomePage';
 import WomenPage from './Pages/WomenPage';
+import SingleProductPage from './Pages/SingleProductPage';
 
 const theme = createTheme({
   typography: {
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/women" element={<WomenPage />} />
+            <Route path="/deals" element={<SingleProductPage />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

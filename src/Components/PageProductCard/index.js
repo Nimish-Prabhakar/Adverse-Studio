@@ -16,7 +16,9 @@ function PageProductCard({
           className="kaftanImage"
         />
         <p className="pageProductCardName">{PageProductCardName}</p>
-        <p className="pageProductCardName">{PageProductCardPrice}</p>
+        <p className="pageProductCardName" style={{ opacity: 0.7 }}>
+          {PageProductCardPrice}
+        </p>
       </div>
     </div>
   );
