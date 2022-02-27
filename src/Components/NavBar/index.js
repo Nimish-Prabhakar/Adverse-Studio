@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import NykaaLogo from '../../assets/img/Nykaa_Logo.png';
 import { AiOutlineSearch, AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
 import { IoBagOutline } from 'react-icons/io5';
@@ -13,24 +13,40 @@ function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
       <div className="navBarWrapper">
         <div className="productLinkWrapper">
           <nav className="productLinkNav">
-            <Link className="individualLinks" to="/women">
+            <NavLink
+              className="individualLinks"
+              to="/women"
+              activeClassName="active"
+            >
               Women
-            </Link>
-            <Link className="individualLinks" to="/decor">
+            </NavLink>
+            <NavLink
+              className="individualLinks"
+              to="/decor"
+              activeClassName="active"
+            >
               Decor
-            </Link>
-            <Link className="individualLinks" to="/kashmiri">
+            </NavLink>
+            <NavLink
+              className="individualLinks"
+              to="/kashmiri"
+              activeClassName="active"
+            >
               Kashmiri
-            </Link>
-            <Link className="individualLinks" to="/deals">
+            </NavLink>
+            <NavLink
+              className="individualLinks"
+              to="/deals"
+              activeClassName="active"
+            >
               Deals
-            </Link>
+            </NavLink>
           </nav>
         </div>
         <div className="navLogoWrapper">
-          <Link to="/">
+          <NavLink to="/">
             <img className="navLogo" src={NykaaLogo} alt="nyka-logo" />
-          </Link>
+          </NavLink>
         </div>
         <div className="navIconsWrapper">
           <div className="iconNav">
@@ -42,9 +58,9 @@ function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
         </div>
       </div>
       <div className="mobileNavWrapper">
-        <Link to="/">
+        <NavLink to="/">
           <img className="navLogoMobile" src={NykaaLogo} alt="nyka-logo" />
-        </Link>
+        </NavLink>
         <AiOutlineSearch />
         <AiOutlineHeart />
         <IoBagOutline />

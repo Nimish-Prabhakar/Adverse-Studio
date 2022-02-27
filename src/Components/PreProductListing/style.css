@@ -1,0 +1,22 @@
+.preProductListingWrapper {
+  margin-top: 10rem;
+  overflow: hidden;
+}
+.fullCollectionLink {
+  font-size: 1rem;
+  font-family: sans-serif;
+  margin-left: 34px;
+  border-bottom: 2px dotted #000;
+  text-decoration: none;
+  transition: 0.3s;
+  opacity: 0.6;
+}
+
+.fullCollectionLink:hover {
+  opacity: 1;
+}
+
+.pageProductCardWrapper {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}

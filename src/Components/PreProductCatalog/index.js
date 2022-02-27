@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import categoryLeft from '../../assets/img/categoryLeft.jpeg';
 import categoryRight from '../../assets/img/categoryRight.jpeg';
+import { Link, animateScroll as scroll } from 'react-scroll';
 import './style.css';
 
 const styles = {
@@ -27,16 +28,71 @@ function PreProductCatalog({ categoryName, categoryLink, imageArray }) {
       </Typography>
       <div className="categoryFlexWrapper">
         <img className="categoryLeft" src={categoryLeft} alt="categoryLeft" />
-        <nav className="categoryNav">
-          <ul className="categoryListingWrapper">
-            <li className="categoriesListing">Kaftaans</li>
-            <li className="categoriesListing">Bottoms</li>
-            <li className="categoriesListing">Tops</li>
-            <li className="categoriesListing">Dresses</li>
-            <li className="categoriesListing">Crochets</li>
-            <li className="categoriesListing">Accessories</li>
-          </ul>
-        </nav>
+        <div className="categoryNav">
+          <div className="categoryListingWrapper">
+            <Link
+              className="categoriesListing"
+              activeClass="active"
+              to="kaftans"
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={500}
+            >
+              Kaftans
+            </Link>
+            <Link
+              className="categoriesListing"
+              to="bottoms"
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={500}
+            >
+              Bottoms
+            </Link>
+            <Link
+              className="categoriesListing"
+              to="tops"
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={500}
+            >
+              Tops
+            </Link>
+            <Link
+              className="categoriesListing"
+              to="dresses"
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={500}
+            >
+              Dresses
+            </Link>
+            <Link
+              className="categoriesListing"
+              to="crochets"
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={500}
+            >
+              Crochets
+            </Link>
+            <Link
+              className="categoriesListing"
+              to="accessories"
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={500}
+            >
+              Accessories
+            </Link>
+          </div>
+        </div>
         <img
           className="categoryRight"
           src={categoryRight}

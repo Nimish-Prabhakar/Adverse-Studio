@@ -1,0 +1,24 @@
+.pageProductCardWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pageProductCardInfo {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.kaftanImage {
+  height: 30rem;
+}
+
+.pageProductCardName {
+  margin-top: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
