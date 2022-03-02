@@ -2,6 +2,7 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  margin-top: 20px;
 }
 
 .singleProductLeft {
@@ -13,9 +14,118 @@
 }
 
 .singleProductLeftWrapper {
-  margin-left: 5rem;
+  margin-left: 15rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10rem;
 }
 
 .singleProductRight {
   width: 50%;
+}
+
+.wishlistInlineWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wishlistInlineWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.colorPickerWrapper {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.carouselImage {
+  width: 60%;
+  margin-left: 10px;
+}
+
+.horizontalBreak {
+  margin-top: 15px;
+  opacity: 0.5;
+}
+
+.colorPickerFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-left: -50px;
+}
+
+.sizePickerWrapper {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sizePickerFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  color: red;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.size {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.singleProductAddBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+
+.singleProductDescriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.descriptionText {
+  width: 350px;
+  margin-top: 10px;
+  margin-left: 15px;
+  opacity: 0.6;
+}
+
+.wishlistIconProduct {
+  cursor: pointer;
+}
+
+.corouselImageWrapper {
+  display: flex;
+  flex-direction: row;
 }
