@@ -19,7 +19,22 @@ function PreProductListing({
   PageProductCardName,
   PageProductCardPrice,
   id,
+  PageProductMinis
 }) {
+
+  function getImageForCard(image_urls) {
+    var hightestPriority = 999
+    var image_url = ''
+    
+    for (let obj of image_urls){
+      if(obj.prefrence < hightestPriority) {
+        hightestPriority = obj.prefrence
+        image_url = obj.image_url
+      }
+    }
+    return image_url
+  }
+
   return (
     <div className="preProductListingWrapper">
       <Typography
@@ -35,30 +50,14 @@ function PreProductListing({
         </Link>
       </Typography>
       <div className="pageProductCardWrapper">
-        <PageProductCard
-          PageProductCardImage={PageProductCardImage}
-          PageProductCardName={PageProductCardName}
-          PageProductCardPrice={PageProductCardPrice}
-          id={id}
-        />
-        <PageProductCard
-          PageProductCardImage={PageProductCardImage}
-          PageProductCardName={PageProductCardName}
-          PageProductCardPrice={PageProductCardPrice}
-          id={id}
-        />
-        <PageProductCard
-          PageProductCardImage={PageProductCardImage}
-          PageProductCardName={PageProductCardName}
-          PageProductCardPrice={PageProductCardPrice}
-          id={id}
-        />
-        <PageProductCard
-          PageProductCardImage={PageProductCardImage}
-          PageProductCardName={PageProductCardName}
-          PageProductCardPrice={PageProductCardPrice}
-          id={id}
-        />
+        {
+          PageProductMinis.map((data) => <PageProductCard
+            PageProductCardImage={getImageForCard(data.image_urls)}
+            PageProductCardName={data.product_name}
+            PageProductCardPrice={data.cost}
+            id={id}
+        />)
+        }
       </div>
     </div>
   );
