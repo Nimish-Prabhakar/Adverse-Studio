@@ -12,7 +12,7 @@ function PageProductCard({
       <div className="pageProductCardInfo">
         <img
           src={PageProductCardImage}
-          alt="kaftanImage"
+          alt={PageProductCardImage}
           className="kaftanImage"
         />
         <p className="pageProductCardName">{PageProductCardName}</p>

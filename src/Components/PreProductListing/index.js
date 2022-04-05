@@ -1,8 +1,8 @@
 import React from 'react';
-import PageProductCard from '../../Components/PageProductCard';
 import Typography from '@mui/material/Typography';
-import './style.css';
 import { Link } from 'react-router-dom';
+import PageProductCard from '../../Components/PageProductCard';
+import './style.css';
 
 const styles = {
   Typography: {
@@ -13,53 +13,37 @@ const styles = {
   },
 };
 
-function PreProductListing({
-  subCategoryName,
-  PageProductCardImage,
-  PageProductCardName,
-  PageProductCardPrice,
-  id,
-  PageProductMinis
-}) {
-
-  function getImageForCard(image_urls) {
-    var hightestPriority = 999
-    var image_url = ''
-    
-    for (let obj of image_urls){
-      if(obj.prefrence < hightestPriority) {
-        hightestPriority = obj.prefrence
-        image_url = obj.image_url
-      }
-    }
-    return image_url
-  }
-
+function PreProductListing({ subCategoryName, PageProductMinis }) {
   return (
-    <div className="preProductListingWrapper">
-      <Typography
-        sx={styles.Typography}
-        align="left"
-        variant="h2"
-        component="div"
-        gutterBottom
-      >
-        {subCategoryName}
-        <Link className="fullCollectionLink" to="/">
-          Shop Full Collection
-        </Link>
-      </Typography>
-      <div className="pageProductCardWrapper">
-        {
-          PageProductMinis.map((data) => <PageProductCard
-            PageProductCardImage={getImageForCard(data.image_urls)}
-            PageProductCardName={data.product_name}
-            PageProductCardPrice={data.cost}
-            id={id}
-        />)
-        }
+    <>
+      <div className="preProductListingWrapper">
+        <Typography
+          sx={styles.Typography}
+          align="left"
+          variant="h2"
+          component="div"
+          gutterBottom
+        >
+          {subCategoryName}
+          <Link className="fullCollectionLink" to="/">
+            Shop Full Collection
+          </Link>
+        </Typography>
+        <div className="pageProductCardWrapper">
+          {PageProductMinis.map((data) => {
+            return (
+              <PageProductCard
+                PageProductCardImage={data.display_image_url}
+                PageProductCardName={data.product_name}
+                PageProductCardPrice={data.cost}
+                id={data.product_id}
+                key={data.product_id}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

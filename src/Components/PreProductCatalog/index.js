@@ -1,7 +1,5 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import categoryLeft from '../../assets/img/categoryLeft.jpeg';
-import categoryRight from '../../assets/img/categoryRight.jpeg';
 import { Link } from 'react-scroll';
 import { BsDashLg } from 'react-icons/bs';
 import './style.css';
@@ -15,7 +13,12 @@ const styles = {
   },
 };
 
-function PreProductCatalog({ categoryName, categoryLink, imageArray }) {
+function PreProductCatalog({
+  pageName,
+  pageCategories,
+  displayImageLeft,
+  displayImageRight,
+}) {
   return (
     <div className="preProductCatalogWrapper">
       <Typography
@@ -25,85 +28,39 @@ function PreProductCatalog({ categoryName, categoryLink, imageArray }) {
         component="div"
         gutterBottom
       >
-        Choose from different categories for Women
+        Choose from different categories for {pageName}
       </Typography>
       <div className="categoryFlexWrapper">
-        <img className="categoryLeft" src={categoryLeft} alt="categoryLeft" />
+        <img
+          className="categoryLeft"
+          src={displayImageLeft}
+          alt="displayImageLeft"
+        />
         <div className="categoryNav">
           <div className="categoryListingWrapper">
-            <Link
-              className="categoriesListing"
-              activeClass="active"
-              to="kaftans"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={1000}
-            >
-              <BsDashLg style={{ paddingTop: '8px' }} />
-              Kaftans
-            </Link>
-            <Link
-              className="categoriesListing"
-              to="bottoms"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={1000}
-            >
-              <BsDashLg style={{ paddingTop: '8px' }} />
-              Bottoms
-            </Link>
-            <Link
-              className="categoriesListing"
-              to="tops"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={1000}
-            >
-              <BsDashLg style={{ paddingTop: '8px' }} />
-              Tops
-            </Link>
-            <Link
-              className="categoriesListing"
-              to="dresses"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={1000}
-            >
-              <BsDashLg style={{ paddingTop: '8px' }} />
-              Dresses
-            </Link>
-            <Link
-              className="categoriesListing"
-              to="crochets"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={1000}
-            >
-              <BsDashLg style={{ paddingTop: '8px' }} />
-              Crochets
-            </Link>
-            <Link
-              className="categoriesListing"
-              to="accessories"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={1000}
-            >
-              <BsDashLg style={{ paddingTop: '8px' }} />
-              Accessories
-            </Link>
+            {pageCategories.map((category) => {
+              return (
+                <Link
+                  className="categoriesListing"
+                  activeClass="active"
+                  to={category}
+                  spy={true}
+                  smooth={true}
+                  offset={-100}
+                  duration={1000}
+                  key={category}
+                >
+                  <BsDashLg style={{ paddingTop: '8px' }} />
+                  {category}
+                </Link>
+              );
+            })}
           </div>
         </div>
         <img
           className="categoryRight"
-          src={categoryRight}
-          alt="categoryRight"
+          src={displayImageRight}
+          alt="displayImageRight"
         />
       </div>
     </div>

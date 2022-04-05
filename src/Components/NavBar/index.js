@@ -2,9 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import NykaaLogo from '../../assets/img/Nykaa_Logo.png';
 import { AiOutlineSearch, AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
-import { IoBagOutline } from 'react-icons/io5';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Search from '../../Components/Search';
+import Cart from '../Cart';
 import './style.css';
 
 function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
@@ -50,10 +50,10 @@ function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
         </div>
         <div className="navIconsWrapper">
           <div className="iconNav">
-            <AiOutlineUser className="navIcons user" />
-            <AiOutlineHeart className="navIcons heart" />
-            <IoBagOutline className="navIcons cart" />
-            <Search />
+            {/* <AiOutlineUser className="navIcons user" />
+            <AiOutlineHeart className="navIcons heart" /> */}
+            <Cart />
+            {/* <Search /> */}
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@ function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
         </NavLink>
         <AiOutlineSearch />
         <AiOutlineHeart />
-        <IoBagOutline />
+        <Cart />
         <GiHamburgerMenu
           className="hamburgerMenu"
           onClick={toggleMenuHandler}
