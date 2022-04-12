@@ -5,12 +5,19 @@
   align-items: center;
 }
 
+.cartLinkNav {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
 .cartContainer {
   position: relative;
 }
 
 .cartIcon {
   font-size: 40px;
+  opacity: 0.5;
 }
 
 .cartValue {
@@ -24,6 +31,6 @@
   color: white;
   text-align: center;
   margin-bottom: -12px;
-  margin-left: 7px;
+  margin-left: 10px;
   font: 15px Arial, sans-serif;
 }

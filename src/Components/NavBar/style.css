@@ -1,6 +1,7 @@
 .navBarWrapper {
   display: flex;
   width: 100vw;
+  height: 5vh;
   margin-bottom: 40px;
   margin-top: 40px;
 }
@@ -65,6 +66,9 @@
 
 .iconNav {
   display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 .searchNav {
