@@ -6,6 +6,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import Search from '../../Components/Search';
 import Cart from '../Cart';
 import UserIcon from '../UserIcon';
+import WishlistIcon from '../WishlistIcon';
 import './style.css';
 
 function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
@@ -54,6 +55,7 @@ function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
             {/* <AiOutlineUser className="navIcons user" />
             <AiOutlineHeart className="navIcons heart" /> */}
             <Cart />
+            <WishlistIcon />
             <UserIcon />
             {/* <Search /> */}
           </div>

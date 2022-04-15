@@ -22,6 +22,11 @@ function UserIcon() {
     setAnchorEl(null);
   };
 
+  const handleUserProfile = () => {
+    navigate('/deliveryDetials');
+    setAnchorEl(null);
+  };
+
   const handleSignIn = () => {
     navigate('/sign-in');
     setAnchorEl(null);
@@ -56,7 +61,7 @@ function UserIcon() {
       >
         {isSignedIn ? (
           <>
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleUserProfile}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem onClick={handleLogOut}>Logout</MenuItem>
           </>

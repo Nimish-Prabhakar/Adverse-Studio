@@ -1,0 +1,18 @@
+.wishListWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.wishListIcon {
+  font-size: 40px;
+  opacity: 0.5;
+}
+
+.wishListIconSelected {
+  color: red;
+  font-size: 40px;
+  opacity: 0.5;
+}

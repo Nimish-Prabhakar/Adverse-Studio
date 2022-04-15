@@ -1,0 +1,19 @@
+.deliveryDetailsPageWrapper {
+  border-top: thick solid #000000;
+  background: #fdfdfa;
+  width: 100vw;
+  height: 85vh;
+}
+
+.deliveryDetailsPageContainer {
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+.deliveryInputFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 60px;
+}

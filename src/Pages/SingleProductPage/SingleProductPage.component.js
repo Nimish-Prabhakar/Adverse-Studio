@@ -25,7 +25,6 @@ function SingleProductPage() {
 
   useEffect(() => {
     setProductInfoFetched(true);
-    console.log('here', productInfo);
     setLoading(false);
   }, [productInfo]);
 
