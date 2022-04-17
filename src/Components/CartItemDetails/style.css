@@ -1,0 +1,35 @@
+.CartItemDetailsWrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.CartItemDetailsLeft {
+  display: flex;
+  flex-direction: row;
+}
+
+.CartItemDetailsLeftFlex {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
+}
+
+.CartItemDetailsLeftImg {
+  height: 15rem;
+}
+
+.CartItemDetailsLeftFlexUpperRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.CartItemDetailsLeftFlexUpperRowIcons {
+  font-size: 20px;
+  margin-left: 15px;
+  cursor: pointer;
+}

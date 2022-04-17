@@ -3,13 +3,12 @@ import { AiFillHeart } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 
-function WishlistIcon() {
+function WishlistIcon({ size }) {
   const navigate = useNavigate();
 
   const [cssClass, setCssClass] = useState('wishListIcon');
 
   const onClickHandler = (e) => {
-    navigate('/wishlist');
     setCssClass('wishListIconSelected');
   };
 
@@ -18,6 +17,7 @@ function WishlistIcon() {
       <AiFillHeart
         id="wishListIcon"
         className={cssClass}
+        style={{ fontSize: size }}
         onClick={onClickHandler}
       />
     </div>

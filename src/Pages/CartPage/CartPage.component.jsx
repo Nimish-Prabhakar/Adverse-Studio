@@ -1,56 +1,184 @@
-import React, { useEffect, useState } from 'react';
-import PreProductCatalog from '../../Components/PreProductCatalog';
-import PreProductListing from '../../Components/PreProductListing';
-import { useDispatch, useSelector } from 'react-redux';
-import { womenPageCategories } from '../../constants/AppConstants';
-import { getAllProductsWomenPage } from './CartPage.actions';
-import './WomenPage.style.css';
+import React, { useState } from 'react';
+import Typography from '@mui/material/Typography';
+import CartItemDetails from '../../Components/CartItemDetails';
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
+import './CartPage.style.css';
 
-function WomenPage() {
-  const dispatch = useDispatch();
+const styles = {
+  typography: {
+    marginLeft: '8%',
+    marginTop: '5%',
+  },
+  promoBtn: {
+    marginLeft: '30px',
+  },
+  buyBtn: {
+    width: '350px',
+  },
+};
 
-  const allProductsData = useSelector(
-    (state) => state.womenPageReducer.productDetails
-  );
-  const allCategories = useSelector(
-    (state) => state.womenPageReducer.individualCategories
-  );
+const ColorButton = styled(Button)(({ theme }) => ({
+  backgroundColor: 'black',
+  '&:hover': {
+    backgroundColor: '#303030',
+  },
+}));
 
-  const [productData, setProductData] = useState([]);
-  const [categories, setCategories] = useState({});
+function CartPage() {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(getAllProductsWomenPage());
-  }, [dispatch]);
+  const [promoCodeApplied, setPromoCodeApplied] = useState(false);
 
-  useEffect(() => {
-    setProductData(allProductsData);
-    setCategories(allCategories);
-  }, [allProductsData, allCategories]);
+  const homePageHandler = (e) => {
+    navigate('/');
+  };
+
+  const promoHandler = (e) => {
+    setPromoCodeApplied(true);
+  };
 
   return (
-    <div className="womenPageWrapper">
-      <PreProductCatalog
-        pageName="Women"
-        pageCategories={womenPageCategories}
-        displayImageLeft={productData.display_image_left}
-        displayImageRight={productData.display_image_right}
-      />
-      {Object.entries(categories).map((val, index) => {
-        const categoryName = val[0];
-        const categoryProducts = val[1];
-        return (
-          <div id={categoryName}>
-            <PreProductListing
-              subCategoryName={categoryName}
-              PageProductMinis={categoryProducts}
-              key={categoryName}
-            />
+    <div className="cartPageWrapper">
+      <Typography
+        sx={styles.typography}
+        variant="h3"
+        gutterBottom
+        component="div"
+      >
+        Shopping Cart
+      </Typography>
+      <div className="cartDetailsContainer">
+        <div className="cartItemDetails">
+          <CartItemDetails />
+          <CartItemDetails />
+        </div>
+        <div className="cartPricingDetails">
+          <div className="squareOutline">
+            <div className="cartPricingDetailsContainer">
+              <Typography
+                sx={styles.typography}
+                variant="h3"
+                gutterBottom
+                component="div"
+              >
+                Your Order
+              </Typography>
+              <div className="cartPricingDetailsPrice">
+                <Typography
+                  sx={styles.typography}
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                >
+                  Price
+                </Typography>
+                <Typography
+                  sx={styles.typography}
+                  variant="h4"
+                  gutterBottom
+                  component="div"
+                >
+                  $400
+                </Typography>
+              </div>
+              <div className="cartPricingDetailsPrice">
+                <Typography
+                  sx={styles.typography}
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                >
+                  Delivery
+                </Typography>
+                <Typography
+                  sx={styles.typography}
+                  variant="h4"
+                  gutterBottom
+                  component="div"
+                >
+                  $40
+                </Typography>
+              </div>
+              {promoCodeApplied && (
+                <div className="cartPricingDetailsPrice">
+                  <Typography
+                    sx={styles.typography}
+                    variant="h6"
+                    gutterBottom
+                    component="div"
+                  >
+                    PromoCode
+                  </Typography>
+                  <Typography
+                    sx={styles.typography}
+                    variant="h4"
+                    gutterBottom
+                    component="div"
+                  >
+                    -$40
+                  </Typography>
+                </div>
+              )}
+              {!promoCodeApplied && (
+                <div className="cartPricingDetailsPromo">
+                  <input placeholder="PromoCode" className="promoInput" />
+                  <ColorButton
+                    onClick={promoHandler}
+                    sx={styles.promoBtn}
+                    variant="contained"
+                  >
+                    Apply
+                  </ColorButton>
+                </div>
+              )}
+            </div>
+            <hr className="promoDivider" />
+            <div className="cartPricingDetailsPrice">
+              <Typography
+                sx={styles.typography}
+                variant="h6"
+                gutterBottom
+                component="div"
+              >
+                Result
+              </Typography>
+              <Typography
+                sx={styles.typography}
+                variant="h4"
+                gutterBottom
+                component="div"
+              >
+                {!promoCodeApplied ? `$440` : `$400`}
+              </Typography>
+            </div>
+            <div className="cartPricingDetailsBtn">
+              <ColorButton sx={styles.buyBtn} variant="contained">
+                Buy
+              </ColorButton>
+              <Typography
+                sx={{ marginTop: '10px' }}
+                variant="h6"
+                gutterBottom
+                component="div"
+              >
+                Or
+              </Typography>
+              <ColorButton
+                onClick={homePageHandler}
+                sx={styles.buyBtn}
+                variant="contained"
+              >
+                Continue Shopping
+              </ColorButton>
+            </div>
           </div>
-        );
-      })}
+        </div>
+      </div>
     </div>
   );
 }
 
-export default WomenPage;
+export default CartPage;

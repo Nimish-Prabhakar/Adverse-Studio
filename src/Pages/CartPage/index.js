@@ -1,3 +1,3 @@
-import WomenPage from './CartPage.component';
+import CartPage from './CartPage.component';
 
-export default WomenPage;
+export default CartPage;

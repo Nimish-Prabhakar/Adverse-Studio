@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -22,6 +22,13 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 function DeliveryDetailsPage() {
+  const [Mno, setMno] = useState('+91  ');
+
+  const onChange = (e) => {
+    setMno(e.target.value);
+    console.log(Mno);
+  };
+
   return (
     <div className="deliveryDetailsPageWrapper">
       <div className="deliveryDetailsPageContainer">
@@ -107,6 +114,8 @@ function DeliveryDetailsPage() {
               label="Mobile Number"
               variant="standard"
               sx={styles.textField}
+              value={Mno}
+              onChange={onChange}
               inputProps={{
                 autocomplete: 'Mobile Number',
                 form: {
