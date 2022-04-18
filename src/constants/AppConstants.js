@@ -6,6 +6,12 @@ export const WOMEN_PAGE_DATA_URL =
 export const SINGLE_PRODUCT_DETAILS_API =
   'https://karkhana-studio-backend.onrender.com/api/v1/listing?product_id=';
 
+export const ADD_USER_SIGN_UP_API =
+  'https://karkhana-studio-backend.onrender.com/api/v1/customer';
+
+export const ADD_USER_SIGN_IN_API =
+  'https://karkhana-studio-backend.onrender.com/api/v1/customer/login';
+
 export const womenPageCategories = [
   'kaftans',
   'tops',

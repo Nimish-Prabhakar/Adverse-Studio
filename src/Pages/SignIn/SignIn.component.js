@@ -11,9 +11,11 @@ import signIn4 from '../../assets/img/signIn4.jpeg';
 import signIn5 from '../../assets/img/signIn5.jpeg';
 import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
-import { signInAction } from './SignIn.actions';
+import { signInAction, signUpAction } from './SignIn.actions';
 import { useNavigate } from 'react-router-dom';
 import { MdPassword } from 'react-icons/md';
+import Alert from '@mui/material/Alert';
+import Loader from '../../Components/Loader';
 import './style.css';
 
 const styles = {
@@ -30,17 +32,68 @@ const styles = {
 };
 
 function SignIn() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [sectionSelected, setSectionSelected] = useState('signInBtn');
+
+  const [signUpUserDetails, setSignUpUserDetails] = useState({
+    email_id: '',
+    first_name: '',
+    last_name: '',
+    password: '',
+    confirm_password: '',
+  });
+
+  const [signInUserDetails, setSignInUserDetails] = useState({
+    email_id: '',
+    password: '',
+  });
+
+  const [serverError, setServerError] = useState('');
+
+  const [emailValidError, setEmailValidError] = useState(false);
+
+  const [emptyEmailError, setEmptyEmailError] = useState(false);
+  const [emptyFnError, setEmptyFnError] = useState(false);
+  const [emptyLnError, setEmptyLnError] = useState(false);
+  const [emptyPasswordError, setEmptyPasswordError] = useState(false);
+  const [emptyConfirmPassError, setEmptyConfirmPassError] = useState(false);
+  const [confirmPassMatch, setConfirmPassMatch] = useState(false);
+  const [passwordLengthError, setPasswordLengthError] = useState(false);
+
+  const [loader, setLoader] = useState(false);
 
   const isSignedIn = useSelector((state) => state.signInPageReducer.isSignedIn);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const serverSideError = useSelector((state) => state.signInPageReducer.error);
+
+  const signInChangeHandler = (e) => {
+    setSignInUserDetails((preValue) => ({
+      ...preValue,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const signUpChangeHandler = (e) => {
+    setSignUpUserDetails((preValue) => ({
+      ...preValue,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSectionSelect = (e) => {
     setSectionSelected(e.target.id);
     const newClass = e.target.className + ' selectedBtn';
     e.target.className = newClass;
+  };
+
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
   };
 
   useEffect(() => {
@@ -63,9 +116,107 @@ function SignIn() {
   const signInSubmitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(signInAction());
-    navigate('/');
+    if (signInUserDetails.email_id.length === 0) {
+      setEmptyEmailError(true);
+      return;
+    } else {
+      setEmptyEmailError(false);
+    }
+
+    const emailValidation = validateEmail(signInUserDetails.email_id);
+
+    if (!emailValidation) {
+      setEmailValidError(true);
+      return;
+    } else {
+      setEmailValidError(false);
+    }
+
+    const userDetailsSignIn = {
+      email_id: signInUserDetails.email_id,
+      password: signInUserDetails.password,
+    };
+
+    dispatch(signInAction(userDetailsSignIn));
   };
+
+  const signUpSubmitHandler = (e) => {
+    e.preventDefault();
+
+    if (signUpUserDetails.first_name.length === 0) {
+      setEmptyFnError(true);
+      return;
+    } else {
+      setEmptyFnError(false);
+    }
+
+    if (signUpUserDetails.last_name.length === 0) {
+      setEmptyLnError(true);
+      return;
+    } else {
+      setEmptyLnError(false);
+    }
+
+    if (signUpUserDetails.email_id.length === 0) {
+      setEmptyEmailError(true);
+      return;
+    } else {
+      setEmptyEmailError(false);
+    }
+
+    const emailValidation = validateEmail(signUpUserDetails.email_id);
+
+    if (!emailValidation) {
+      setEmailValidError(true);
+      return;
+    } else {
+      setEmailValidError(false);
+    }
+
+    if (signUpUserDetails.password.length === 0) {
+      setEmptyPasswordError(true);
+      return;
+    } else {
+      setEmptyPasswordError(false);
+    }
+
+    if (signUpUserDetails.password.length < 7) {
+      setPasswordLengthError(true);
+      return;
+    } else {
+      setPasswordLengthError(false);
+    }
+
+    if (signUpUserDetails.confirm_password.length === 0) {
+      setEmptyConfirmPassError(true);
+      return;
+    } else {
+      setEmptyConfirmPassError(false);
+    }
+
+    if (signUpUserDetails.password !== signUpUserDetails.confirm_password) {
+      setConfirmPassMatch(true);
+      return;
+    } else {
+      setConfirmPassMatch(false);
+    }
+
+    const userDetailsSignUp = {
+      first_name: signUpUserDetails.first_name,
+      last_name: signUpUserDetails.last_name,
+      email_id: signUpUserDetails.email_id,
+      password: signUpUserDetails.password,
+    };
+
+    setLoader(true);
+
+    dispatch(signUpAction(userDetailsSignUp));
+  };
+
+  useEffect(() => {
+    setServerError(serverSideError);
+    setLoader(false);
+  }, [serverSideError]);
 
   return (
     <div className="signInPageWrapper">
@@ -88,6 +239,38 @@ function SignIn() {
         </div>
         <form className="signInPageForm">
           <div className="signInPageTextfields">
+            {emailValidError && (
+              <Alert severity="error">Please enter a valid email address</Alert>
+            )}
+            {emptyEmailError && (
+              <Alert severity="error">Please enter your email address</Alert>
+            )}
+            {emptyFnError && (
+              <Alert severity="error">Please enter your first namee</Alert>
+            )}
+            {emptyLnError && (
+              <Alert severity="error">Please enter your last name</Alert>
+            )}
+            {emptyPasswordError && (
+              <Alert severity="error">Please enter your password</Alert>
+            )}
+            {passwordLengthError && (
+              <Alert severity="error">
+                Passowrd should be atleast 8 characters long
+              </Alert>
+            )}
+            {emptyConfirmPassError && (
+              <Alert severity="error">Please confirm your password</Alert>
+            )}
+            {confirmPassMatch && (
+              <Alert severity="error">
+                Confirm password does not match your password
+              </Alert>
+            )}
+            {serverError.length > 0 && (
+              <Alert severity="error">{serverError}</Alert>
+            )}
+            {loader && <Loader />}
             {sectionSelected === 'signUpBtn' && (
               <>
                 <TextField
@@ -96,6 +279,9 @@ function SignIn() {
                   placeholder="First Name"
                   autoComplete="off"
                   type="text"
+                  name="first_name"
+                  value={signUpUserDetails.first_name}
+                  onChange={signUpChangeHandler}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -111,6 +297,9 @@ function SignIn() {
                   placeholder="Last Name"
                   autoComplete="off"
                   type="text"
+                  name="last_name"
+                  value={signUpUserDetails.last_name}
+                  onChange={signUpChangeHandler}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -120,59 +309,51 @@ function SignIn() {
                   }}
                   variant="standard"
                 />
-              </>
-            )}
-            <TextField
-              sx={styles.typography}
-              id="input-with-icon-textfield"
-              placeholder="Email Address"
-              autoComplete="off"
-              type="email"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <BiUser style={{ fontSize: '1.3rem' }} />
-                  </InputAdornment>
-                ),
-              }}
-              variant="standard"
-            />
-            <TextField
-              sx={styles.typography}
-              id="input-with-icon-textfield"
-              placeholder="Password"
-              autoComplete="off"
-              type="password"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <BiLockOpenAlt style={{ fontSize: '1.3rem' }} />
-                  </InputAdornment>
-                ),
-              }}
-              variant="standard"
-            />
-            {sectionSelected === 'signInBtn' && (
-              <>
-                <div className="signInBtn">
-                  <Button
-                    sx={styles.button}
-                    variant="contained"
-                    onClick={signInSubmitHandler}
-                  >
-                    Sign In
-                  </Button>
-                </div>
-              </>
-            )}
-            {sectionSelected === 'signUpBtn' && (
-              <>
+                <TextField
+                  sx={styles.typography}
+                  id="input-with-icon-textfield"
+                  placeholder="Email Address"
+                  autoComplete="off"
+                  type="email"
+                  name="email_id"
+                  value={signUpUserDetails.email_id}
+                  onChange={signUpChangeHandler}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <BiUser style={{ fontSize: '1.3rem' }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="standard"
+                />
+                <TextField
+                  sx={styles.typography}
+                  id="input-with-icon-textfield"
+                  placeholder="Password"
+                  autoComplete="off"
+                  type="password"
+                  name="password"
+                  value={signUpUserDetails.password}
+                  onChange={signUpChangeHandler}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <BiLockOpenAlt style={{ fontSize: '1.3rem' }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="standard"
+                />
                 <TextField
                   sx={styles.typography}
                   id="input-with-icon-textfield"
                   placeholder="Confirm Password"
                   autoComplete="off"
                   type="password"
+                  name="confirm_password"
+                  value={signUpUserDetails.confirm_password}
+                  onChange={signUpChangeHandler}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -183,8 +364,61 @@ function SignIn() {
                   variant="standard"
                 />
                 <div className="signInBtn">
-                  <Button sx={styles.button} variant="contained">
+                  <Button
+                    onClick={signUpSubmitHandler}
+                    sx={styles.button}
+                    variant="contained"
+                  >
                     Sign Up
+                  </Button>
+                </div>
+              </>
+            )}
+            {sectionSelected === 'signInBtn' && (
+              <>
+                <TextField
+                  sx={styles.typography}
+                  id="input-with-icon-textfield"
+                  placeholder="Email Address"
+                  autoComplete="off"
+                  type="email"
+                  name="email_id"
+                  value={signInUserDetails.email_id}
+                  onChange={signInChangeHandler}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <BiUser style={{ fontSize: '1.3rem' }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="standard"
+                />
+                <TextField
+                  sx={styles.typography}
+                  id="input-with-icon-textfield"
+                  placeholder="Password"
+                  autoComplete="off"
+                  type="password"
+                  name="password"
+                  value={signInUserDetails.password}
+                  onChange={signInChangeHandler}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <BiLockOpenAlt style={{ fontSize: '1.3rem' }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="standard"
+                />
+                <div className="signInBtn">
+                  <Button
+                    sx={styles.button}
+                    variant="contained"
+                    onClick={signInSubmitHandler}
+                  >
+                    Sign In
                   </Button>
                 </div>
               </>
