@@ -1,6 +1,6 @@
 .navCartWrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
@@ -9,6 +9,9 @@
   cursor: pointer;
   text-decoration: none;
   color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cartContainer {
@@ -16,21 +19,6 @@
 }
 
 .cartIcon {
-  font-size: 40px;
+  font-size: 25px;
   opacity: 0.5;
-}
-
-.cartValue {
-  border-radius: 50%;
-  width: 26px;
-  height: 26px;
-  padding: 4px;
-  background: #e91e63;
-  border: 2px solid #666;
-  font-weight: 900;
-  color: white;
-  text-align: center;
-  margin-bottom: -12px;
-  margin-left: 10px;
-  font: 15px Arial, sans-serif;
 }

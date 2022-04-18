@@ -52,12 +52,10 @@ function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
         </div>
         <div className="navIconsWrapper">
           <div className="iconNav">
-            {/* <AiOutlineUser className="navIcons user" />
-            <AiOutlineHeart className="navIcons heart" /> */}
-            <Cart />
-            <WishlistIcon size="45px" />
+            <Search />
             <UserIcon />
-            {/* <Search /> */}
+            <WishlistIcon size="25px" />
+            <Cart />
           </div>
         </div>
       </div>

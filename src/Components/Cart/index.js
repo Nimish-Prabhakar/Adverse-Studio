@@ -12,8 +12,8 @@ function Cart() {
   return (
     <div className="navCartWrapper">
       <Link className="cartLinkNav" to="/cart">
-        <p className="cartValue">{cartCount}</p>
         <AiOutlineShoppingCart className="cartIcon" />
+        <p>{`(${cartCount})`}</p>
       </Link>
     </div>
   );
