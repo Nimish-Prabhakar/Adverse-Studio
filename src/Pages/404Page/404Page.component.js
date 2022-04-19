@@ -24,7 +24,7 @@ function Page404() {
     <div className="page404Wrapper">
       <img className="page404Img" src={wrongShop} alt="wrongshop" />
       <Typography
-        sx={{ fontSize: '8rem' }}
+        sx={{ fontSize: '8rem', marginBottom: 0 }}
         variant="h1"
         component="div"
         gutterBottom
