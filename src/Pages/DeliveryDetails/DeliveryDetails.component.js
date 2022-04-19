@@ -26,7 +26,6 @@ function DeliveryDetailsPage() {
 
   const onChange = (e) => {
     setMno(e.target.value);
-    console.log(Mno);
   };
 
   return (
@@ -123,7 +122,7 @@ function DeliveryDetailsPage() {
                 },
               }}
             />
-            <ColorButton variant="contained">Continue</ColorButton>
+            <ColorButton variant="contained">Save Delivery Details</ColorButton>
           </div>
         </form>
       </div>

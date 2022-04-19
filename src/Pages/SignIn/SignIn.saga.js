@@ -6,13 +6,11 @@ import * as types from '../../constants/ActionTypes';
 export function* addUserSignInSaga({ userDetails }) {
   try {
     const response = yield call(addUserSignIn, userDetails);
+    console.log(response);
     if (!response.ok) {
-      if (!response.json.errorDescription) {
-        response.json.errorDescription = 'Internal Server Error';
-      }
-      const signInStatus = response.ok;
-      yield put({ type: types.SIGN_IN_SUCCESS, signInStatus });
-    }
+      const serverSideError = response.json;
+      yield put({ type: types.SIGN_IN_ERROR, serverSideError });
+    } else yield put({ type: types.SIGN_IN_SUCCESS, response });
   } catch (error) {
     yield put({ type: types.SIGN_IN_ERROR });
   }
@@ -21,6 +19,7 @@ export function* addUserSignInSaga({ userDetails }) {
 export function* addUserSignUpSaga({ userDetails }) {
   try {
     const response = yield call(addUserSignUp, userDetails);
+    console.log(response);
     if (!response.ok) {
       const serverSideError = response.json;
       yield put({ type: types.SIGN_UP_ERROR, serverSideError });

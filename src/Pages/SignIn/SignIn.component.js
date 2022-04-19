@@ -64,6 +64,10 @@ function SignIn() {
 
   const [loader, setLoader] = useState(false);
 
+  const signInstatus = useSelector(
+    (state) => state.signInPageReducer.signInstatus
+  );
+
   const isSignedIn = useSelector((state) => state.signInPageReducer.isSignedIn);
 
   const serverSideError = useSelector((state) => state.signInPageReducer.error);
@@ -132,13 +136,29 @@ function SignIn() {
       setEmailValidError(false);
     }
 
+    if (signInUserDetails.password.length === 0) {
+      setEmptyPasswordError(true);
+      return;
+    } else {
+      setEmptyPasswordError(false);
+    }
+
     const userDetailsSignIn = {
       email_id: signInUserDetails.email_id,
       password: signInUserDetails.password,
     };
 
+    setLoader(true);
+
     dispatch(signInAction(userDetailsSignIn));
   };
+
+  useEffect(() => {
+    if (signInstatus) {
+      setLoader(false);
+      navigate('/');
+    }
+  }, [signInstatus, isSignedIn, navigate]);
 
   const signUpSubmitHandler = (e) => {
     e.preventDefault();
