@@ -1,0 +1,14 @@
+.page404Wrapper {
+  width: 100vw;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.page404Img {
+  height: 45%;
+  margin-top: 40px;
+}

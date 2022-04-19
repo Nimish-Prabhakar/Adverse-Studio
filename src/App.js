@@ -7,6 +7,7 @@ import SignInPage from './Pages/SignIn';
 import SingleProductPage from './Pages/SingleProductPage';
 import DeliveryDetailsPage from './Pages/DeliveryDetails';
 import CartPage from './Pages/CartPage';
+import Page404 from './Pages/404Page';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/deliveryDetials" element={<DeliveryDetailsPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
     </>
