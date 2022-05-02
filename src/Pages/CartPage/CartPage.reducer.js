@@ -23,6 +23,13 @@ const cartPageReducer = (state = initialState, action) => {
         cartItemsCount,
       };
     }
+    case types.GET_CART_ITEMS_SUCCESS: {
+      const { cartItems } = action;
+      return {
+        ...state,
+        cartItems,
+      };
+    }
     default:
       return state;
   }

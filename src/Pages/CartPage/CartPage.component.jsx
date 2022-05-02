@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import CartItemDetails from '../../Components/CartItemDetails';
-import TextField from '@mui/material/TextField';
+import { getCartItems, deleteCartItem } from './CartPage.actions';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import './CartPage.style.css';
+import { useDispatch, useSelector } from 'react-redux';
+import ModalMessage from '../../Components/Modal';
 
 const styles = {
   typography: {
@@ -29,8 +31,14 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 function CartPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [promoCodeApplied, setPromoCodeApplied] = useState(false);
+  const [cartItemsDetails, setCartItemsDetails] = useState([]);
+  const [totalCost, setTotalCost] = useState(0);
+
+  const cartItems = useSelector((state) => state.cartPageReducer.cartItems);
+  const isSignedIn = useSelector((state) => state.signInPageReducer.isSignedIn);
 
   const homePageHandler = (e) => {
     navigate('/');
@@ -39,6 +47,31 @@ function CartPage() {
   const promoHandler = (e) => {
     setPromoCodeApplied(true);
   };
+
+  const totalCostCalculator = (items) => {
+    let cost = 0;
+    if (items.length > 0) {
+      for (let i = 0; i < items.length; i++) {
+        cost += items[i].cost;
+      }
+    } else {
+      return 0;
+    }
+    return cost;
+  };
+
+  const deleteCartItemHandler = () => {
+    dispatch(deleteCartItem(5, 9, 'M', 'Red'));
+  };
+
+  useEffect(() => {
+    dispatch(getCartItems(5));
+  }, [dispatch]);
+
+  useEffect(() => {
+    setCartItemsDetails(cartItems);
+    setTotalCost(totalCostCalculator(cartItems));
+  }, [cartItems]);
 
   return (
     <div className="cartPageWrapper">
@@ -52,8 +85,20 @@ function CartPage() {
       </Typography>
       <div className="cartDetailsContainer">
         <div className="cartItemDetails">
-          <CartItemDetails />
-          <CartItemDetails />
+          {cartItemsDetails.map((item) => {
+            return (
+              <>
+                <CartItemDetails
+                  name={item.product_name}
+                  image={item.display_image_url}
+                  price={item.cost}
+                  size={item.size}
+                  color={item.color}
+                  description={item.description}
+                />
+              </>
+            );
+          })}
         </div>
         <div className="cartPricingDetails">
           <div className="squareOutline">
@@ -81,7 +126,7 @@ function CartPage() {
                   gutterBottom
                   component="div"
                 >
-                  $400
+                  &#8377;{totalCost}
                 </Typography>
               </div>
               <div className="cartPricingDetailsPrice">
@@ -99,7 +144,7 @@ function CartPage() {
                   gutterBottom
                   component="div"
                 >
-                  $40
+                  &#8377;{totalCost >= 1000 ? 0 : 200}
                 </Typography>
               </div>
               {promoCodeApplied && (
@@ -118,7 +163,7 @@ function CartPage() {
                     gutterBottom
                     component="div"
                   >
-                    -$40
+                    -&#8377;400
                   </Typography>
                 </div>
               )}
@@ -151,13 +196,21 @@ function CartPage() {
                 gutterBottom
                 component="div"
               >
-                {!promoCodeApplied ? `$440` : `$400`}
+                {!promoCodeApplied ? `${totalCost}` : `1100`}
               </Typography>
             </div>
             <div className="cartPricingDetailsBtn">
-              <ColorButton sx={styles.buyBtn} variant="contained">
-                Buy
-              </ColorButton>
+              {!isSignedIn ? (
+                <ModalMessage sx={styles.buyBtn} />
+              ) : (
+                <ColorButton
+                  onClick={homePageHandler}
+                  sx={styles.buyBtn}
+                  variant="contained"
+                >
+                  Buy
+                </ColorButton>
+              )}
               <Typography
                 sx={{ marginTop: '10px' }}
                 variant="h6"

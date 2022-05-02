@@ -1,7 +1,8 @@
 import * as types from '../../constants/ActionTypes';
 
-export const signInAction = () => ({
-  type: types.SIGN_IN_SUCCESS,
+export const deliveryDetailsEntered = (deliveryDetails) => ({
+  type: types.DELIVERY_DETAILS_ENTERED,
+  deliveryDetails,
 });
 
 export const signOutAction = () => ({

@@ -1,37 +1,39 @@
 import React from 'react';
-import Kaftan from '../../assets/img/kaftan.jpeg';
 import Typography from '@mui/material/Typography';
-import WishlistIcon from '../WishlistIcon';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { AiOutlineHeart } from 'react-icons/ai';
 import './style.css';
 
-function CartItemDetails({ image, name, price, size, color }) {
+function CartItemDetails({ image, name, price, size, color, description }) {
   return (
     <>
       <hr />
       <div className="CartItemDetailsWrapper">
         <div className="CartItemDetailsLeft">
-          <img src={Kaftan} alt="Kaftan" className="CartItemDetailsLeftImg" />
+          <img
+            src={image}
+            alt={description}
+            className="CartItemDetailsLeftImg"
+          />
           <div className="CartItemDetailsLeftFlex">
             <div className="CartItemDetailsLeftFlexUpperRow">
               <Typography variant="h6" gutterBottom component="div">
-                Pink Kaftan
+                {name}
               </Typography>
               <AiOutlineHeart className="CartItemDetailsLeftFlexUpperRowIcons" />
               <RiDeleteBin6Line className="CartItemDetailsLeftFlexUpperRowIcons" />
             </div>
             <Typography variant="caption" display="block" gutterBottom>
-              Size: M
+              Size: {size}
             </Typography>
             <Typography variant="caption" display="block" gutterBottom>
-              Color: Pink
+              Color: {color}
             </Typography>
           </div>
         </div>
         <div className="CartItemDetailsRight">
           <Typography variant="h3" gutterBottom component="div">
-            $200
+            &#8377;{price}
           </Typography>
         </div>
       </div>

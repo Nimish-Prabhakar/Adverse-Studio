@@ -1,8 +1,10 @@
 import * as types from '../../constants/ActionTypes';
 
-const initialState = {};
+const initialState = {
+  deliveryDetails: {},
+};
 
-const signInPageReducer = (state = initialState, action) => {
+const deliveryDetailsPageReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SIGN_IN_SUCCESS: {
       let { isSignedIn } = state;
@@ -17,4 +19,4 @@ const signInPageReducer = (state = initialState, action) => {
   }
 };
 
-export default signInPageReducer;
+export default deliveryDetailsPageReducer;

@@ -27,6 +27,9 @@ function SingleProduct({
   product_id,
   product_name,
   size_available = [],
+  userSelectedColor,
+  userSelectedSize,
+  submitHandler,
 }) {
   const dispatch = useDispatch();
 
@@ -63,19 +66,18 @@ function SingleProduct({
 
   const colorSelectHandler = (color) => {
     setSelectedColor(color);
+    userSelectedColor(color);
   };
 
   const sizeSelectHandler = (size) => {
     setSelectedSize(size);
-    setOpcaity('clicked');
+    userSelectedSize(size);
   };
 
   const cartHandler = () => {
-    console.log('entered btn');
     dispatch(updateCartCountIncrement());
     setItemAddedCart(true);
     setTimeout(() => {
-      console.log('entered');
       setItemAddedCart(false);
     }, 3000);
   };
@@ -159,7 +161,7 @@ function SingleProduct({
               <ColorButton
                 size="large"
                 variant="contained"
-                onClick={cartHandler}
+                onClick={submitHandler}
               >
                 Add to Cart - ${cost}
               </ColorButton>

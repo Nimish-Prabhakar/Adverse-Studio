@@ -34,11 +34,13 @@ const signInPageReducer = (state = initialState, action) => {
       };
     }
     case types.SIGN_UP_SUCCESS: {
-      let { isSignedUp } = state;
+      let { isSignedUp, isSignedIn } = state;
       isSignedUp = true;
+      isSignedIn = true;
       return {
         ...state,
         isSignedUp,
+        isSignedIn,
       };
     }
     case types.SIGN_UP_ERROR: {

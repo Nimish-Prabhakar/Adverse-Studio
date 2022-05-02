@@ -17,3 +17,10 @@
   align-items: flex-start;
   margin-top: 60px;
 }
+
+.confirmEditFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}

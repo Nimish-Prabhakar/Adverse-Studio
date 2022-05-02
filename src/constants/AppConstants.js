@@ -12,6 +12,12 @@ export const ADD_USER_SIGN_UP_API =
 export const ADD_USER_SIGN_IN_API =
   'https://karkhana-studio-backend.onrender.com/api/v1/customer/login';
 
+export const CART_ITEMS_API =
+  'https://karkhana-studio-backend.onrender.com/api/v1/customer';
+
+export const WISHLIST_PRODUCTS_API =
+  'https://karkhana-studio-backend.onrender.com/api/v1/customer';
+
 export const womenPageCategories = [
   'kaftans',
   'tops',

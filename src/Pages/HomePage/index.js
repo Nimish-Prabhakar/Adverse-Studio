@@ -2,6 +2,7 @@ import React from 'react';
 import bannerImage from '../../assets/img/banner_image.jpeg';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import Footer from '../../Components/Footer';
 import { purple } from '@mui/material/colors';
 import './style.css';
 
@@ -28,6 +29,7 @@ function HomePage() {
           </ColorButton>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
