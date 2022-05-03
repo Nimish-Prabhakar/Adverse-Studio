@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import './CartPage.style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import ModalMessage from '../../Components/Modal';
+import CartModal from './CartModal';
 
 const styles = {
   typography: {
@@ -39,6 +39,9 @@ function CartPage() {
 
   const cartItems = useSelector((state) => state.cartPageReducer.cartItems);
   const isSignedIn = useSelector((state) => state.signInPageReducer.isSignedIn);
+  const productDetailsGuest = useSelector(
+    (state) => state.singleProductPageReducer.productsAddedGuest
+  );
 
   const homePageHandler = (e) => {
     navigate('/');
@@ -72,6 +75,8 @@ function CartPage() {
     setCartItemsDetails(cartItems);
     setTotalCost(totalCostCalculator(cartItems));
   }, [cartItems]);
+
+  console.log(productDetailsGuest);
 
   return (
     <div className="cartPageWrapper">
@@ -201,7 +206,7 @@ function CartPage() {
             </div>
             <div className="cartPricingDetailsBtn">
               {!isSignedIn ? (
-                <ModalMessage sx={styles.buyBtn} />
+                <CartModal sx={styles.buyBtn} />
               ) : (
                 <ColorButton
                   onClick={homePageHandler}

@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 // web.cjs is required for IE11 support
 import { useSpring, animated } from '@react-spring/web';
+import { Link } from 'react-router-dom';
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
@@ -51,7 +52,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-function ModalMessage({ sx }) {
+function CartModal({ sx }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -75,10 +76,28 @@ function ModalMessage({ sx }) {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="spring-modal-title" variant="h6" component="h2">
-              Would you like to Sign Up ?
+              Would you like to
+              <span style={{ marginLeft: '10px' }}>
+                <Link
+                  style={{ textDecoration: 'none', color: 'darkred' }}
+                  to="/sign-in"
+                >
+                  Sign Up
+                </Link>
+              </span>{' '}
+              ?
             </Typography>
             <Typography id="spring-modal-description" sx={{ mt: 2 }}>
-              Or continue as a guest
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  fontSize: '17px',
+                  borderBottom: '1px solid black',
+                }}
+                to="/deliveryDetails"
+              >
+                Or continue as a guest -->
+              </Link>
             </Typography>
           </Box>
         </Fade>
@@ -87,4 +106,4 @@ function ModalMessage({ sx }) {
   );
 }
 
-export default ModalMessage;
+export default CartModal;

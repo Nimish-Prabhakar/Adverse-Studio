@@ -4,6 +4,7 @@ const initialState = {
   productInfo: {},
   colorsAvailable: [],
   productInfoFetched: false,
+  productsAddedGuest: [],
 };
 
 const singleProductPageReducer = (state = initialState, action) => {
@@ -17,6 +18,15 @@ const singleProductPageReducer = (state = initialState, action) => {
         productInfo,
         colorsAvailable,
         productInfoFetched: true,
+      };
+    }
+    case types.ADD_PRODUCT_TO_CART_GUEST: {
+      let { productsAddedGuest } = state;
+      const { productDetails } = action;
+      productsAddedGuest.push(productDetails);
+      return {
+        ...state,
+        productsAddedGuest,
       };
     }
     default:
