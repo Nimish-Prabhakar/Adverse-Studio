@@ -1,0 +1,14 @@
+.categorySortWrapper {
+  position: relative;
+}
+
+.categorySortFlex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dropDownIcon {
+  margin-left: 10px;
+  cursor: pointer;
+}

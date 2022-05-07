@@ -27,4 +27,64 @@ export const womenPageCategories = [
   'accessories',
 ];
 
+export const sleeveLengthCategory = [
+  {
+    index: 1,
+    itemText: 'Long',
+  },
+  {
+    index: 2,
+    itemText: 'Medium',
+  },
+  {
+    index: 3,
+    itemText: 'Short',
+  },
+];
+
+export const sizeCategory = [
+  {
+    index: 1,
+    itemText: 'Long',
+  },
+  {
+    index: 2,
+    itemText: 'Medium',
+  },
+  {
+    index: 3,
+    itemText: 'Short',
+  },
+];
+
+export const priceCategory = [
+  {
+    index: 1,
+    itemText: 'Low to High',
+  },
+  {
+    index: 2,
+    itemText: 'High to Low',
+  },
+];
+
+export const colorCategory = [
+  {
+    index: 1,
+    itemText: 'Red',
+  },
+  {
+    index: 2,
+    itemText: 'Blue',
+  },
+  {
+    index: 3,
+    itemText: 'Green',
+  },
+  {
+    index: 4,
+    itemText: 'Black',
+  },
+];
+
 console.log('Karkhana Studio Version: ', VERSION);

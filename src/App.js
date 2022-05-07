@@ -7,6 +7,7 @@ import SignInPage from './Pages/SignIn';
 import SingleProductPage from './Pages/SingleProductPage';
 import DeliveryDetailsPage from './Pages/DeliveryDetails';
 import CartPage from './Pages/CartPage';
+import { KaftansPage, TopsPage } from './Pages/WomenCollectionPages';
 import Page404 from './Pages/404Page';
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/deliveryDetails" element={<DeliveryDetailsPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/kaftans" element={<KaftansPage />} />
+          <Route path="/tops" element={<TopsPage />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

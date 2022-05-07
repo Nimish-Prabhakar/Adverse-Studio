@@ -79,7 +79,11 @@ function CartModal({ sx }) {
               Would you like to
               <span style={{ marginLeft: '10px' }}>
                 <Link
-                  style={{ textDecoration: 'none', color: 'darkred' }}
+                  style={{
+                    textDecoration: 'none',
+                    color: 'darkred',
+                    borderBottom: '1px solid black',
+                  }}
                   to="/sign-in"
                 >
                   Sign Up

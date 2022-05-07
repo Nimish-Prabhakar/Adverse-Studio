@@ -1,0 +1,44 @@
+.womenCollectionPagesGrid {
+  display: grid;
+  margin-left: 80px;
+  margin-right: 40px;
+  grid-template-columns: 200px 200px 200px 200px;
+  row-gap: 100px;
+  column-gap: 250px;
+}
+
+.womenCollectionPagesWrapper {
+  width: 100vw;
+  height: 100vh;
+}
+
+.womenCollectionPagesHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.womenCollectionPagesSortFlexWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 140px;
+  margin-bottom: 10px;
+  margin-right: 100px;
+}
+
+.womenCollectionPagesSortFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
+}
+
+.womenCollectionPageshrBar {
+  margin-left: 80px;
+  margin-right: 60px;
+  margin-bottom: 80px;
+}

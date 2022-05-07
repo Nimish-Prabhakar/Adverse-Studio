@@ -64,7 +64,7 @@ function CartPage() {
   };
 
   const deleteCartItemHandler = () => {
-    dispatch(deleteCartItem(5, 9, 'M', 'Red'));
+    dispatch(deleteCartItem(5, 9, 'S', 'RED'));
   };
 
   useEffect(() => {
