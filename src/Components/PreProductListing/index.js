@@ -25,7 +25,7 @@ function PreProductListing({ subCategoryName, PageProductMinis }) {
           gutterBottom
         >
           {subCategoryName}
-          <Link className="fullCollectionLink" to="/">
+          <Link className="fullCollectionLink" to={`/${subCategoryName}`}>
             Shop Full Collection
           </Link>
         </Typography>

@@ -49,7 +49,10 @@ export function* deleteCartItemSaga({ customer_id, product_id, size, color }) {
     if (!response.ok) {
       const serverSideError = response.json;
       yield put({ type: types.DELETE_CART_ITEM_ERROR, serverSideError });
-    } else yield put({ type: types.DELETE_CART_ITEM_SUCCESS, response });
+    } else {
+      const deleteItemStatus = response.ok;
+      yield put({ type: types.DELETE_CART_ITEM_SUCCESS, deleteItemStatus });
+    }
   } catch (error) {
     yield put({ type: types.DELETE_CART_ITEM_ERROR });
   }

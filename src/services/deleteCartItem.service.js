@@ -7,7 +7,7 @@ import { CART_ITEMS_API } from '../constants/AppConstants';
 const deleteCartItem = async (customer_id, product_id, size, color) => {
   try {
     const response = await fetch(
-      `${CART_ITEMS_API}/${customer_id}/cart/?product_id=${product_id}&size=$${size}&color=${color}`,
+      `${CART_ITEMS_API}/${customer_id}/cart?product_id=${product_id}&size=${size}&color=${color}`,
       {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },

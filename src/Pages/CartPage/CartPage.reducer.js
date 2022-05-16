@@ -3,6 +3,7 @@ import * as types from '../../constants/ActionTypes';
 const initialState = {
   cartItemsCount: 0,
   cartItems: [],
+  deleteItemStatus: false,
 };
 
 const cartPageReducer = (state = initialState, action) => {
@@ -28,6 +29,13 @@ const cartPageReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems,
+      };
+    }
+    case types.DELETE_CART_ITEM_SUCCESS: {
+      const { deleteItemStatus } = action;
+      return {
+        ...state,
+        deleteItemStatus,
       };
     }
     default:

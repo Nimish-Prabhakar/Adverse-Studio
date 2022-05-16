@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import ClickAwayListener from '@mui/base/ClickAwayListener';
 import './style.css';
 
 function CategorySort({ title, options, sortedValue }) {
@@ -24,49 +25,55 @@ function CategorySort({ title, options, sortedValue }) {
     });
   };
 
+  const handleClickAway = () => {
+    setOpenList(false);
+  };
+
   return (
-    <div className="categorySortWrapper">
-      <div className="categorySortFlex">
-        <p>{title}</p>
-        {openList ? (
-          <BsChevronCompactUp
-            onClick={handleOpenList}
-            className="dropDownIcon"
-          />
-        ) : (
-          <BsChevronCompactDown
-            onClick={handleOpenList}
-            className="dropDownIcon"
-          />
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <div className="categorySortWrapper">
+        <div className="categorySortFlex">
+          <p>{title}</p>
+          {openList ? (
+            <BsChevronCompactUp
+              onClick={handleOpenList}
+              className="dropDownIcon"
+            />
+          ) : (
+            <BsChevronCompactDown
+              onClick={handleOpenList}
+              className="dropDownIcon"
+            />
+          )}
+        </div>
+        {openList && (
+          <Box
+            sx={{
+              width: '150%',
+              maxWidth: 160,
+              bgcolor: 'white',
+              border: '1px solid black',
+              position: 'absolute',
+              marginTop: '6px',
+              marginLeft: '-15px',
+            }}
+          >
+            {options.map((item) => {
+              return (
+                <List component="nav" aria-label="secondary mailbox folder">
+                  <ListItemButton
+                    selected={selectedIndex === item.index}
+                    onClick={(event) => handleListItemClick(event, item.index)}
+                  >
+                    <ListItemText primary={item.itemText} />
+                  </ListItemButton>
+                </List>
+              );
+            })}
+          </Box>
         )}
       </div>
-      {openList && (
-        <Box
-          sx={{
-            width: '150%',
-            maxWidth: 160,
-            bgcolor: 'white',
-            border: '1px solid black',
-            position: 'absolute',
-            marginTop: '6px',
-            marginLeft: '-15px',
-          }}
-        >
-          {options.map((item) => {
-            return (
-              <List component="nav" aria-label="secondary mailbox folder">
-                <ListItemButton
-                  selected={selectedIndex === item.index}
-                  onClick={(event) => handleListItemClick(event, item.index)}
-                >
-                  <ListItemText primary={item.itemText} />
-                </ListItemButton>
-              </List>
-            );
-          })}
-        </Box>
-      )}
-    </div>
+    </ClickAwayListener>
   );
 }
 

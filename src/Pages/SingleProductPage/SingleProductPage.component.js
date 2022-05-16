@@ -66,6 +66,8 @@ function SingleProductPage() {
     }
   };
 
+  console.log(avaialableColors);
+
   return (
     <div className="SingleProductPageWrapper">
       {productInfoFetched ? (

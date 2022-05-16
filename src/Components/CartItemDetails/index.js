@@ -4,7 +4,15 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { AiOutlineHeart } from 'react-icons/ai';
 import './style.css';
 
-function CartItemDetails({ image, name, price, size, color, description }) {
+function CartItemDetails({
+  image,
+  name,
+  price,
+  size,
+  color,
+  description,
+  deleteHandler,
+}) {
   return (
     <>
       <hr />
@@ -21,7 +29,10 @@ function CartItemDetails({ image, name, price, size, color, description }) {
                 {name}
               </Typography>
               <AiOutlineHeart className="CartItemDetailsLeftFlexUpperRowIcons" />
-              <RiDeleteBin6Line className="CartItemDetailsLeftFlexUpperRowIcons" />
+              <RiDeleteBin6Line
+                className="CartItemDetailsLeftFlexUpperRowIcons"
+                onClick={deleteHandler}
+              />
             </div>
             <Typography variant="caption" display="block" gutterBottom>
               Size: {size}

@@ -1,0 +1,15 @@
+.orderSuccessWrapper {
+  width: 100vw;
+  height: 85vh;
+}
+
+.orderSuccessFlex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.orderSuccessImg {
+  height: 500px;
+}
