@@ -4,11 +4,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import './style.css';
-import { useSelector } from 'react-redux';
+import Alert from '@mui/material/Alert';
 
 const styles = {
   textField: {
     width: '600px',
+    marginBottom: '20px',
+  },
+  alert: {
+    width: '30%',
     marginBottom: '20px',
   },
 };
@@ -23,11 +27,8 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 function DeliveryDetailsPage() {
-  const storedDeliveryDetails = useSelector(
-    (state) => state.deliveryDetailsPageReducer.deliveryDetails
-  );
-
   const [deliveryDetails, setDeliveryDetails] = useState({
+    fullName: '',
     houseNumber: '',
     street: '',
     landmark: '',
@@ -38,6 +39,10 @@ function DeliveryDetailsPage() {
   });
 
   const [deliveryDetailsEntered, setDeliveryDetailsEntered] = useState(false);
+  const [emptyFieldError, setEmptyFieldError] = useState({
+    key: '',
+    state: false,
+  });
 
   const deliveryDetailsInputHandler = (e) => {
     setDeliveryDetails((preValue) => ({
@@ -53,184 +58,227 @@ function DeliveryDetailsPage() {
   const deliveryDetailsSubmitHandler = (e) => {
     e.preventDefault();
 
+    // if(Object.values(deliveryDetails))
+
+    for (let [key, value] of Object.entries(deliveryDetails)) {
+      if (value === '') {
+        if (key === 'fullName') {
+          key = 'Full Name';
+        }
+        if (key === 'houseNumber') {
+          key = 'Flat, House no. or Building';
+        }
+        if (key === 'mobileNumber') {
+          key = 'Mobile Number';
+        }
+        setEmptyFieldError({ key, state: true });
+        return;
+      }
+    }
+
+    setEmptyFieldError({ state: false });
+
     console.log(deliveryDetails);
 
     setDeliveryDetailsEntered(true);
   };
 
   return (
-    <div className="deliveryDetailsPageWrapper">
-      <div className="deliveryDetailsPageContainer">
-        {!deliveryDetailsEntered && (
-          <>
-            <Typography variant="h6" gutterBottom component="div">
-              PLEASE ENTER THE DELIVERY DETAILS
-            </Typography>
-            <form>
+    <>
+      <div className="deliveryDetailsPageWrapper">
+        <div className="deliveryDetailsPageContainer">
+          {emptyFieldError.state && (
+            <Alert sx={styles.alert} severity="error">
+              Please enter your {emptyFieldError.key}
+            </Alert>
+          )}
+          {!deliveryDetailsEntered && (
+            <>
+              <Typography variant="h6" gutterBottom component="div">
+                PLEASE ENTER THE DELIVERY DETAILS
+              </Typography>
+              <form>
+                <div className="deliveryInputFields">
+                  <TextField
+                    id="standard-basic"
+                    label="Full Name"
+                    variant="standard"
+                    sx={styles.textField}
+                    value={deliveryDetails.fullName}
+                    name="fullName"
+                    onChange={deliveryDetailsInputHandler}
+                    inputProps={{
+                      form: {
+                        autocomplete: 'off',
+                      },
+                    }}
+                  />
+                  <TextField
+                    id="standard-basic"
+                    label="Flat, House no., Building, Company, Apartment"
+                    variant="standard"
+                    sx={styles.textField}
+                    value={deliveryDetails.houseNumber}
+                    name="houseNumber"
+                    onChange={deliveryDetailsInputHandler}
+                    inputProps={{
+                      form: {
+                        autocomplete: 'off',
+                      },
+                    }}
+                  />
+                  <TextField
+                    id="standard-basic"
+                    label="Area, Street. Sector, Village"
+                    variant="standard"
+                    sx={styles.textField}
+                    value={deliveryDetails.street}
+                    name="street"
+                    onChange={deliveryDetailsInputHandler}
+                    inputProps={{
+                      autocomplete: 'Street',
+                      form: {
+                        autocomplete: 'off',
+                      },
+                    }}
+                  />
+                  <TextField
+                    id="standard-basic"
+                    label="Landmark"
+                    variant="standard"
+                    sx={styles.textField}
+                    value={deliveryDetails.landmark}
+                    name="landmark"
+                    onChange={deliveryDetailsInputHandler}
+                    inputProps={{
+                      autocomplete: 'Landmark',
+                      form: {
+                        autocomplete: 'off',
+                      },
+                    }}
+                  />
+                  <TextField
+                    id="standard-basic"
+                    label="City"
+                    variant="standard"
+                    sx={styles.textField}
+                    value={deliveryDetails.city}
+                    name="city"
+                    onChange={deliveryDetailsInputHandler}
+                    inputProps={{
+                      autocomplete: 'City',
+                      form: {
+                        autocomplete: 'off',
+                      },
+                    }}
+                  />
+                  <TextField
+                    id="standard-basic"
+                    label="State"
+                    variant="standard"
+                    sx={styles.textField}
+                    value={deliveryDetails.state}
+                    name="state"
+                    onChange={deliveryDetailsInputHandler}
+                    inputProps={{
+                      autocomplete: 'State',
+                      form: {
+                        autocomplete: 'off',
+                      },
+                    }}
+                  />
+                  <TextField
+                    id="standard-basic"
+                    label="Pincode"
+                    variant="standard"
+                    sx={styles.textField}
+                    value={deliveryDetails.pincode}
+                    name="pincode"
+                    onChange={deliveryDetailsInputHandler}
+                    inputProps={{
+                      autocomplete: 'Pincode',
+                      form: {
+                        autocomplete: 'off',
+                      },
+                    }}
+                  />
+                  <TextField
+                    id="standard-basic"
+                    label="Mobile Number"
+                    variant="standard"
+                    sx={styles.textField}
+                    value={deliveryDetails.mobileNumber}
+                    name="mobileNumber"
+                    onChange={deliveryDetailsInputHandler}
+                    inputProps={{
+                      autocomplete: 'Mobile Number',
+                      form: {
+                        autocomplete: 'off',
+                      },
+                    }}
+                  />
+                  <ColorButton
+                    onClick={deliveryDetailsSubmitHandler}
+                    variant="contained"
+                  >
+                    Save Delivery Details
+                  </ColorButton>
+                </div>
+              </form>
+            </>
+          )}
+          {deliveryDetailsEntered && (
+            <>
+              <Typography variant="h6" gutterBottom component="div">
+                PLEASE CONFIRM YOUR DELIVERY DETAILS
+              </Typography>
               <div className="deliveryInputFields">
-                <TextField
-                  id="standard-basic"
-                  label="House No./Building Name"
-                  variant="standard"
-                  sx={styles.textField}
-                  value={deliveryDetails.houseNumber}
-                  name="houseNumber"
-                  onChange={deliveryDetailsInputHandler}
-                  inputProps={{
-                    autocomplete: 'House No./Building Name',
-                    form: {
-                      autocomplete: 'off',
-                    },
-                  }}
-                />
-                <TextField
-                  id="standard-basic"
-                  label="Street"
-                  variant="standard"
-                  sx={styles.textField}
-                  value={deliveryDetails.street}
-                  name="street"
-                  onChange={deliveryDetailsInputHandler}
-                  inputProps={{
-                    autocomplete: 'Street',
-                    form: {
-                      autocomplete: 'off',
-                    },
-                  }}
-                />
-                <TextField
-                  id="standard-basic"
-                  label="Landmark"
-                  variant="standard"
-                  sx={styles.textField}
-                  value={deliveryDetails.landmark}
-                  name="landmark"
-                  onChange={deliveryDetailsInputHandler}
-                  inputProps={{
-                    autocomplete: 'Landmark',
-                    form: {
-                      autocomplete: 'off',
-                    },
-                  }}
-                />
-                <TextField
-                  id="standard-basic"
-                  label="City"
-                  variant="standard"
-                  sx={styles.textField}
-                  value={deliveryDetails.city}
-                  name="city"
-                  onChange={deliveryDetailsInputHandler}
-                  inputProps={{
-                    autocomplete: 'City',
-                    form: {
-                      autocomplete: 'off',
-                    },
-                  }}
-                />
-                <TextField
-                  id="standard-basic"
-                  label="State"
-                  variant="standard"
-                  sx={styles.textField}
-                  value={deliveryDetails.state}
-                  name="state"
-                  onChange={deliveryDetailsInputHandler}
-                  inputProps={{
-                    autocomplete: 'State',
-                    form: {
-                      autocomplete: 'off',
-                    },
-                  }}
-                />
-                <TextField
-                  id="standard-basic"
-                  label="Pincode"
-                  variant="standard"
-                  sx={styles.textField}
-                  value={deliveryDetails.pincode}
-                  name="pincode"
-                  onChange={deliveryDetailsInputHandler}
-                  inputProps={{
-                    autocomplete: 'Pincode',
-                    form: {
-                      autocomplete: 'off',
-                    },
-                  }}
-                />
-                <TextField
-                  id="standard-basic"
-                  label="Mobile Number"
-                  variant="standard"
-                  sx={styles.textField}
-                  value={deliveryDetails.mobileNumber}
-                  name="mobileNumber"
-                  onChange={deliveryDetailsInputHandler}
-                  inputProps={{
-                    autocomplete: 'Mobile Number',
-                    form: {
-                      autocomplete: 'off',
-                    },
-                  }}
-                />
-                <ColorButton
-                  onClick={deliveryDetailsSubmitHandler}
-                  variant="contained"
-                >
-                  Save Delivery Details
-                </ColorButton>
+                <Typography variant="h6" gutterBottom component="div">
+                  {deliveryDetails.fullName}
+                </Typography>
+                <Typography variant="h6" gutterBottom component="div">
+                  {deliveryDetails.houseNumber}
+                </Typography>
+                <Typography variant="h6" gutterBottom component="div">
+                  {deliveryDetails.street}
+                </Typography>
+                <Typography variant="h6" gutterBottom component="div">
+                  {deliveryDetails.landmark}
+                </Typography>
+                <Typography variant="h6" gutterBottom component="div">
+                  {deliveryDetails.city}
+                </Typography>
+                <Typography variant="h6" gutterBottom component="div">
+                  {deliveryDetails.state}
+                </Typography>
+                <Typography variant="h6" gutterBottom component="div">
+                  {deliveryDetails.pincode}
+                </Typography>
+                <Typography variant="h6" gutterBottom component="div">
+                  {deliveryDetails.mobileNumber}
+                </Typography>
+                <div className="confirmEditFlex">
+                  <ColorButton
+                    onClick={editDeliveryDetails}
+                    sx={{ width: '100px' }}
+                    variant="contained"
+                  >
+                    Edit
+                  </ColorButton>
+                  <ColorButton
+                    onClick={deliveryDetailsSubmitHandler}
+                    sx={{ width: '100px', marginLeft: '30px' }}
+                    variant="contained"
+                  >
+                    Confirm
+                  </ColorButton>
+                </div>
               </div>
-            </form>
-          </>
-        )}
-        {deliveryDetailsEntered && (
-          <>
-            <Typography variant="h6" gutterBottom component="div">
-              PLEASE CONFIRM YOUR DELIVERY DETAILS
-            </Typography>
-            <div className="deliveryInputFields">
-              <Typography variant="h6" gutterBottom component="div">
-                House No./Building Name : {deliveryDetails.houseNumber}
-              </Typography>
-              <Typography variant="h6" gutterBottom component="div">
-                Street : {deliveryDetails.street}
-              </Typography>
-              <Typography variant="h6" gutterBottom component="div">
-                Landmark : {deliveryDetails.landmark}
-              </Typography>
-              <Typography variant="h6" gutterBottom component="div">
-                City : {deliveryDetails.city}
-              </Typography>
-              <Typography variant="h6" gutterBottom component="div">
-                State : {deliveryDetails.state}
-              </Typography>
-              <Typography variant="h6" gutterBottom component="div">
-                Pincode : {deliveryDetails.pincode}
-              </Typography>
-              <Typography variant="h6" gutterBottom component="div">
-                Mobile Number : {deliveryDetails.mobileNumber}
-              </Typography>
-              <div className="confirmEditFlex">
-                <ColorButton
-                  onClick={editDeliveryDetails}
-                  sx={{ width: '100px' }}
-                  variant="contained"
-                >
-                  Edit
-                </ColorButton>
-                <ColorButton
-                  onClick={deliveryDetailsSubmitHandler}
-                  sx={{ width: '100px', marginLeft: '30px' }}
-                  variant="contained"
-                >
-                  Confirm
-                </ColorButton>
-              </div>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

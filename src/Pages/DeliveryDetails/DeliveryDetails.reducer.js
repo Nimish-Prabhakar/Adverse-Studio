@@ -6,14 +6,6 @@ const initialState = {
 
 const deliveryDetailsPageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.SIGN_IN_SUCCESS: {
-      let { isSignedIn } = state;
-      isSignedIn = true;
-      return {
-        ...state,
-        isSignedIn,
-      };
-    }
     default:
       return state;
   }

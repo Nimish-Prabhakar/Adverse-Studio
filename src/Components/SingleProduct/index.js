@@ -234,7 +234,6 @@ function SingleProduct({
           <Carousel
             centerMode={true}
             centerSlidePercentage="50"
-            infiniteLoop={true}
             showStatus={false}
           >
             <img
