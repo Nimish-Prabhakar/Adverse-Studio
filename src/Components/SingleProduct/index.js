@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel } from 'react-responsive-carousel';
 import './style.css';
 
 const ColorButton = styled(Button)(({ theme }) => ({
@@ -229,7 +231,12 @@ function SingleProduct({
           </div>
         </div>
         <div className="singleProductRight">
-          <div className="corouselImageWrapper">
+          <Carousel
+            centerMode={true}
+            centerSlidePercentage="50"
+            infiniteLoop={true}
+            showStatus={false}
+          >
             <img
               className="carouselImage"
               src={singleProductImage}
@@ -240,7 +247,37 @@ function SingleProduct({
               src={singleProductImage2}
               alt="singleProductImage2"
             />
-          </div>
+            <img
+              className="carouselImage"
+              src={singleProductImage2}
+              alt="singleProductImage2"
+            />
+            <img
+              className="carouselImage"
+              src={singleProductImage2}
+              alt="singleProductImage2"
+            />
+            <img
+              className="carouselImage"
+              src={singleProductImage2}
+              alt="singleProductImage2"
+            />
+            <img
+              className="carouselImage"
+              src={singleProductImage2}
+              alt="singleProductImage2"
+            />
+            <img
+              className="carouselImage"
+              src={singleProductImage2}
+              alt="singleProductImage2"
+            />
+            <img
+              className="carouselImage"
+              src={singleProductImage2}
+              alt="singleProductImage2"
+            />
+          </Carousel>
         </div>
       </div>
     </>

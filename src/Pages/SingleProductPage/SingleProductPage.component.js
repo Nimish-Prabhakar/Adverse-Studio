@@ -58,15 +58,12 @@ function SingleProductPage() {
       size: selectedSize,
       quantity: 1,
     };
-    console.log(cartItems);
     if (isSignedIn) {
       dispatch(addCartItems(5, cartItems));
     } else {
       dispatch(addProductDetailsToCart(cartItems));
     }
   };
-
-  console.log(avaialableColors);
 
   return (
     <div className="SingleProductPageWrapper">
