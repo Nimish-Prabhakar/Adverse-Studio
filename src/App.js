@@ -10,6 +10,7 @@ import CartPage from './Pages/CartPage';
 import { KaftansPage, TopsPage } from './Pages/WomenCollectionPages';
 import Page404 from './Pages/404Page';
 import OrderSuccess from './Pages/OrderSuccessPage';
+import UserAccount from './Pages/UserAccountPage';
 import ScrollToTop from './utils/ScrollToTop';
 
 function App() {
@@ -23,11 +24,12 @@ function App() {
             <Route path="/women" element={<WomenPage />} />
             <Route path="/deals" element={<SingleProductPage />} />
             <Route path="/sign-in" element={<SignInPage />} />
-            <Route path="/deliveryDetails" element={<DeliveryDetailsPage />} />
+            <Route path="/delivery-details" element={<DeliveryDetailsPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/kaftans" element={<KaftansPage />} />
             <Route path="/tops" element={<TopsPage />} />
             <Route path="/order-success" element={<OrderSuccess />} />
+            <Route path="/account" element={<UserAccount />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
         </ScrollToTop>

@@ -3,10 +3,9 @@ import * as types from '../../constants/ActionTypes';
 import addItemToCart from '../../services/AddItemToCart.service';
 import getCartItems from '../../services/getCartItems.service';
 import deleteCartItem from '../../services/deleteCartItem.service';
+import addCouponCode from '../../services/addCouponCode.service';
+import cartCheckout from '../../services/cartCheckout.service';
 
-/**
- * Saga used to get all products listed on women page
- */
 export function* addCartItemSaga({ customer_id, cartItems }) {
   try {
     const response = yield call(addItemToCart, customer_id, cartItems);
@@ -27,10 +26,14 @@ export function* getCartItemsSaga({ customer_id }) {
       error.status = response.status;
       throw error;
     }
-    const cartItems = response.json;
+    const cartItems = response.json.ProductDetails;
+    const cartItemStatus = response.ok;
+    const cartValue = response.json.CartAmount;
     yield put({
       type: types.GET_CART_ITEMS_SUCCESS,
       cartItems,
+      cartItemStatus,
+      cartValue,
     });
   } catch (error) {
     yield put({ type: types.GET_CART_ITEMS_ERROR });
@@ -55,5 +58,48 @@ export function* deleteCartItemSaga({ customer_id, product_id, size, color }) {
     }
   } catch (error) {
     yield put({ type: types.DELETE_CART_ITEM_ERROR });
+  }
+}
+
+export function* addCouponCodeSaga({ customer_id, coupon_code, cart_value }) {
+  try {
+    const response = yield call(
+      addCouponCode,
+      customer_id,
+      coupon_code,
+      cart_value
+    );
+    if (!response.ok) {
+      const serverSideError = response.json;
+      yield put({ type: types.ADD_COUPON_CODE_ERROR, serverSideError });
+    } else {
+      console.log(response);
+      const couponDiscountedValue = response.json.discounted_amount;
+      const couponPercentageValue = response.json.discount_percentage;
+      yield put({
+        type: types.ADD_COUPON_CODE_SUCCESS,
+        couponDiscountedValue,
+        couponPercentageValue,
+      });
+    }
+  } catch (error) {
+    yield put({ type: types.ADD_COUPON_CODE_ERROR });
+  }
+}
+
+export function* cartCheckoutSaga({ customer_id, coupon_code }) {
+  try {
+    const response = yield call(cartCheckout, customer_id, coupon_code);
+    if (!response.ok) {
+      const serverSideError = response.json;
+      yield put({ type: types.CART_CHECKOUT_API_ERROR, serverSideError });
+    } else {
+      console.log(response);
+      yield put({
+        type: types.CART_CHECKOUT_API_SUCCESS,
+      });
+    }
+  } catch (error) {
+    yield put({ type: types.CART_CHECKOUT_API_ERROR });
   }
 }

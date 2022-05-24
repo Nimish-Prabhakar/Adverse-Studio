@@ -18,6 +18,12 @@ export const CART_ITEMS_API =
 export const WISHLIST_PRODUCTS_API =
   'https://karkhana-studio-backend.onrender.com/api/v1/customer';
 
+export const COUPON_CODE_API =
+  'https://karkhana-studio-backend.onrender.com/api/v1/discount';
+
+export const CHECKOUT_API =
+  'https://karkhana-studio-backend.onrender.com/api/v1/checkout';
+
 export const womenPageCategories = [
   'kaftans',
   'tops',

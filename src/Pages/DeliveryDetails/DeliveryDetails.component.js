@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
 import './style.css';
 import Alert from '@mui/material/Alert';
 
@@ -28,6 +29,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 function DeliveryDetailsPage() {
   const [deliveryDetails, setDeliveryDetails] = useState({
+    email: '',
     fullName: '',
     houseNumber: '',
     street: '',
@@ -44,6 +46,8 @@ function DeliveryDetailsPage() {
     state: false,
   });
 
+  const isSignedIn = useSelector((state) => state.signInPageReducer.isSignedIn);
+
   const deliveryDetailsInputHandler = (e) => {
     setDeliveryDetails((preValue) => ({
       ...preValue,
@@ -58,7 +62,10 @@ function DeliveryDetailsPage() {
   const deliveryDetailsSubmitHandler = (e) => {
     e.preventDefault();
 
-    // if(Object.values(deliveryDetails))
+    if (isSignedIn) {
+      delete deliveryDetails.fullName;
+      delete deliveryDetails.email;
+    }
 
     for (let [key, value] of Object.entries(deliveryDetails)) {
       if (value === '') {
@@ -73,12 +80,10 @@ function DeliveryDetailsPage() {
         }
         setEmptyFieldError({ key, state: true });
         return;
+      } else {
+        setEmptyFieldError({ state: false });
       }
     }
-
-    setEmptyFieldError({ state: false });
-
-    console.log(deliveryDetails);
 
     setDeliveryDetailsEntered(true);
   };
@@ -99,20 +104,38 @@ function DeliveryDetailsPage() {
               </Typography>
               <form>
                 <div className="deliveryInputFields">
-                  <TextField
-                    id="standard-basic"
-                    label="Full Name"
-                    variant="standard"
-                    sx={styles.textField}
-                    value={deliveryDetails.fullName}
-                    name="fullName"
-                    onChange={deliveryDetailsInputHandler}
-                    inputProps={{
-                      form: {
-                        autocomplete: 'off',
-                      },
-                    }}
-                  />
+                  {!isSignedIn && (
+                    <>
+                      <TextField
+                        id="standard-basic"
+                        label="Email Address"
+                        variant="standard"
+                        sx={styles.textField}
+                        value={deliveryDetails.email}
+                        name="email"
+                        onChange={deliveryDetailsInputHandler}
+                        inputProps={{
+                          form: {
+                            autocomplete: 'off',
+                          },
+                        }}
+                      />
+                      <TextField
+                        id="standard-basic"
+                        label="Full Name"
+                        variant="standard"
+                        sx={styles.textField}
+                        value={deliveryDetails.fullName}
+                        name="fullName"
+                        onChange={deliveryDetailsInputHandler}
+                        inputProps={{
+                          form: {
+                            autocomplete: 'off',
+                          },
+                        }}
+                      />
+                    </>
+                  )}
                   <TextField
                     id="standard-basic"
                     label="Flat, House no., Building, Company, Apartment"
@@ -233,9 +256,16 @@ function DeliveryDetailsPage() {
                 PLEASE CONFIRM YOUR DELIVERY DETAILS
               </Typography>
               <div className="deliveryInputFields">
-                <Typography variant="h6" gutterBottom component="div">
-                  {deliveryDetails.fullName}
-                </Typography>
+                {!isSignedIn && (
+                  <>
+                    <Typography variant="h6" gutterBottom component="div">
+                      {deliveryDetails.email}
+                    </Typography>
+                    <Typography variant="h6" gutterBottom component="div">
+                      {deliveryDetails.fullName}
+                    </Typography>
+                  </>
+                )}
                 <Typography variant="h6" gutterBottom component="div">
                   {deliveryDetails.houseNumber}
                 </Typography>

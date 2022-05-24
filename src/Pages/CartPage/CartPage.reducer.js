@@ -4,6 +4,9 @@ const initialState = {
   cartItemsCount: 0,
   cartItems: [],
   deleteItemStatus: false,
+  cartItemStatus: false,
+  couponDiscountedValue: 0,
+  couponPercentageValue: 0,
 };
 
 const cartPageReducer = (state = initialState, action) => {
@@ -25,10 +28,11 @@ const cartPageReducer = (state = initialState, action) => {
       };
     }
     case types.GET_CART_ITEMS_SUCCESS: {
-      const { cartItems } = action;
+      const { cartItems, cartItemStatus } = action;
       return {
         ...state,
         cartItems,
+        cartItemStatus,
       };
     }
     case types.DELETE_CART_ITEM_SUCCESS: {
@@ -36,6 +40,14 @@ const cartPageReducer = (state = initialState, action) => {
       return {
         ...state,
         deleteItemStatus,
+      };
+    }
+    case types.ADD_COUPON_CODE_SUCCESS: {
+      const { couponDiscountedValue, couponPercentageValue } = action;
+      return {
+        ...state,
+        couponDiscountedValue,
+        couponPercentageValue,
       };
     }
     default:

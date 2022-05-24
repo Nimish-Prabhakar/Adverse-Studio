@@ -13,14 +13,15 @@ import rootSaga from './RootSaga';
  * Configuration of redux store
  */
 
-const persistConfig = {
-  key: 'root',
-  storage,
+const configureStore = () => {
+  const sagaMiddleware = createSagaMiddleware();
+  return {
+    ...createStore(
+      rootReducer,
+      composeWithDevTools(applyMiddleware(sagaMiddleware))
+    ),
+    runSaga: sagaMiddleware.run(rootSaga),
+  };
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-const sagaMiddleware = createSagaMiddleware();
-let store = createStore(persistedReducer, applyMiddleware(sagaMiddleware));
-let persistor = persistStore(store);
-
-export { store, persistor, sagaMiddleware };
+export default configureStore;

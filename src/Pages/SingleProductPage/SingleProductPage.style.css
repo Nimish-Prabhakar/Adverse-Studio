@@ -1,0 +1,6 @@
+.selectionError {
+  position: absolute;
+  width: 400px;
+  left: 15%;
+  top: 20%;
+}

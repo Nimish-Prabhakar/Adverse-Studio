@@ -20,7 +20,7 @@
 }
 
 .squareOutline {
-  height: 60vh;
+  height: 64vh;
   width: 25vw;
   border: 3px solid black;
 }
@@ -36,6 +36,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.cartPricingDetailsPriceDiscount {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
   width: 90%;
 }

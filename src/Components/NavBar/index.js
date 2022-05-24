@@ -43,6 +43,13 @@ function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
             >
               Deals
             </NavLink>
+            <NavLink
+              className="individualLinks"
+              to="/furniture"
+              activeClassName="active"
+            >
+              Furniture
+            </NavLink>
           </nav>
         </div>
         <div className="navLogoWrapper">

@@ -13,9 +13,10 @@ import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { signInAction, signUpAction } from './SignIn.actions';
 import { useNavigate } from 'react-router-dom';
-import { MdPassword } from 'react-icons/md';
+import { MdPassword, MdAlternateEmail } from 'react-icons/md';
 import Alert from '@mui/material/Alert';
 import Loader from '../../Components/Loader';
+import ForgotPasswordModal from './ForgotPasswordModal';
 import './style.css';
 
 const styles = {
@@ -155,6 +156,7 @@ function SignIn() {
 
   useEffect(() => {
     if (signInstatus) {
+      localStorage.setItem('isSignedIn', signInstatus);
       setLoader(false);
       navigate('/');
     }
@@ -305,7 +307,7 @@ function SignIn() {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <FiUsers style={{ fontSize: '1.3rem' }} />
+                        <BiUser style={{ fontSize: '1.3rem' }} />
                       </InputAdornment>
                     ),
                   }}
@@ -341,7 +343,7 @@ function SignIn() {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <BiUser style={{ fontSize: '1.3rem' }} />
+                        <MdAlternateEmail style={{ fontSize: '1.3rem' }} />
                       </InputAdornment>
                     ),
                   }}
@@ -432,6 +434,7 @@ function SignIn() {
                   }}
                   variant="standard"
                 />
+                <ForgotPasswordModal />
                 <div className="signInBtn">
                   <Button
                     sx={styles.button}

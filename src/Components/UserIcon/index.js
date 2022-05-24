@@ -24,7 +24,7 @@ function UserIcon() {
   };
 
   const handleUserProfile = () => {
-    navigate('/deliveryDetials');
+    navigate('/account');
     setAnchorEl(null);
   };
 
@@ -36,6 +36,21 @@ function UserIcon() {
   const handleLogOut = () => {
     dispatch(signOutAction());
     navigate('/');
+    setAnchorEl(null);
+  };
+
+  const handleContactUs = () => {
+    navigate('/contact-us');
+    setAnchorEl(null);
+  };
+
+  const handleWishlist = () => {
+    navigate('/wishlist');
+    setAnchorEl(null);
+  };
+
+  const handleOrders = () => {
+    navigate('/cart');
     setAnchorEl(null);
   };
 
@@ -62,9 +77,11 @@ function UserIcon() {
       >
         {isSignedIn ? (
           <>
-            <MenuItem onClick={handleUserProfile}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+            <MenuItem onClick={handleUserProfile}>Your Account</MenuItem>
+            <MenuItem onClick={handleOrders}>Your Orders</MenuItem>
+            <MenuItem onClick={handleWishlist}>Your Wishlist</MenuItem>
+            <MenuItem onClick={handleContactUs}>Contact Us</MenuItem>
+            <MenuItem onClick={handleLogOut}>Sign Out</MenuItem>
           </>
         ) : (
           <MenuItem onClick={handleSignIn}>Sign In</MenuItem>

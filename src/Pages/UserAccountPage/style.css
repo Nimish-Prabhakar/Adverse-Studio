@@ -1,0 +1,18 @@
+.userAccountWrapper {
+  width: 100vw;
+  height: 85vh;
+}
+
+.userAccountFlex {
+  margin-top: 50px;
+  margin-left: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.userAccountBoxIcon {
+  width: 100px;
+  height: 62px;
+}

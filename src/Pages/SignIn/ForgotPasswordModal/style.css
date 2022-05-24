@@ -1,0 +1,32 @@
+.ForgotPasswordModalWrapper {
+  width: 400px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ForgotPasswordModalText {
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ForgotPasswordModalText:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+.ForgotPasswordModalFlex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ForgotPasswordModalInput {
+  margin-top: 10px;
+  width: 100%;
+  padding: 5px;
+}
+
+.blankInput {
+  border-color: red;
+}

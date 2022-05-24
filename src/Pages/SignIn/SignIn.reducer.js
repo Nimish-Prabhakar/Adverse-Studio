@@ -6,21 +6,24 @@ const initialState = {
   error: '',
   serverStatus: null,
   signInstatus: false,
+  customer_id: 0,
 };
 
 const signInPageReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SIGN_IN_SUCCESS: {
-      let { isSignedIn, signInstatus, error } = state;
+      let { isSignedIn, signInstatus, error, customer_id } = state;
       const { response } = action;
       signInstatus = response.ok;
       isSignedIn = true;
       error = '';
+      customer_id = response.customer_id;
       return {
         ...state,
         isSignedIn,
         signInstatus,
         error,
+        customer_id,
       };
     }
     case types.SIGN_OUT_SUCCESS: {

@@ -6,6 +6,7 @@ import {
   getSingleProductDetails,
 } from './SingleProductPage.action';
 import { addCartItems } from '../CartPage/CartPage.actions';
+import Alert from '@mui/material/Alert';
 import Loader from '../../Components/Loader';
 import './SingleProductPage.style.css';
 
@@ -30,6 +31,8 @@ function SingleProductPage() {
   const [colorSizes, setColorSizes] = useState([]);
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+  const [colorSelectionError, setColorSelectionError] = useState(false);
+  const [sizeSelectionError, setSizeSelectionError] = useState(false);
 
   useEffect(() => {
     setProductInfo(selectedProductInfo);
@@ -52,39 +55,61 @@ function SingleProductPage() {
 
   const cartItemSubmitHandler = (e) => {
     e.preventDefault();
+    if (selectedColor === '') {
+      setColorSelectionError(true);
+      return;
+    } else {
+      setColorSelectionError(false);
+    }
+    if (selectedSize === '') {
+      setSizeSelectionError(true);
+      return;
+    } else {
+      setSizeSelectionError(false);
+    }
+    console.log('reached');
     const cartItems = {
       product_id: productInfo.product_id,
       color: selectedColor.toUpperCase(),
       size: selectedSize,
       quantity: 1,
     };
-    if (isSignedIn) {
-      dispatch(addCartItems(5, cartItems));
-    } else {
-      dispatch(addProductDetailsToCart(cartItems));
-    }
+
+    dispatch(addCartItems(5, cartItems));
   };
 
   return (
-    <div className="SingleProductPageWrapper">
-      {productInfoFetched ? (
-        <SingleProduct
-          cost={productInfo.cost}
-          description={productInfo.description}
-          product_catalogue_category_name={
-            productInfo.product_catalogue_category_name
-          }
-          product_name={productInfo.product_name}
-          colors_available={avaialableColors}
-          size_available={colorSizes}
-          userSelectedColor={colorSizeHandler}
-          userSelectedSize={sizeSelectHandler}
-          submitHandler={cartItemSubmitHandler}
-        />
-      ) : (
-        <Loader loading={loading} />
+    <>
+      {colorSelectionError && (
+        <Alert className="selectionError" severity="error">
+          Please Select a Color
+        </Alert>
       )}
-    </div>
+      {sizeSelectionError && (
+        <Alert className="selectionError" severity="error">
+          Please Select a Size
+        </Alert>
+      )}
+      <div className="SingleProductPageWrapper">
+        {productInfoFetched ? (
+          <SingleProduct
+            cost={productInfo.cost}
+            description={productInfo.description}
+            product_catalogue_category_name={
+              productInfo.product_catalogue_category_name
+            }
+            product_name={productInfo.product_name}
+            colors_available={avaialableColors}
+            size_available={colorSizes}
+            userSelectedColor={colorSizeHandler}
+            userSelectedSize={sizeSelectHandler}
+            submitHandler={cartItemSubmitHandler}
+          />
+        ) : (
+          <Loader loading={loading} />
+        )}
+      </div>
+    </>
   );
 }
 

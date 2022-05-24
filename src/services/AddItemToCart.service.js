@@ -14,7 +14,7 @@ const addItemToCart = async (customer_id, cartItems) => {
 
   try {
     const response = await fetch(`${CART_ITEMS_API}/${customer_id}/cart`, {
-      method: 'PUT',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestBody),
     });

@@ -26,3 +26,16 @@ export const deleteCartItem = (customer_id, product_id, size, color) => ({
   size,
   color,
 });
+
+export const addCouponCode = (customer_id, coupon_code, cart_value) => ({
+  type: types.ADD_COUPON_CODE,
+  customer_id,
+  coupon_code,
+  cart_value,
+});
+
+export const cartCheckout = (customer_id, coupon_code) => ({
+  type: types.CART_CHECKOUT_API,
+  customer_id,
+  coupon_code,
+});
