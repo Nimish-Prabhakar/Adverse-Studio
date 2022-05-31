@@ -11,6 +11,7 @@ import { KaftansPage, TopsPage } from './Pages/WomenCollectionPages';
 import Page404 from './Pages/404Page';
 import OrderSuccess from './Pages/OrderSuccessPage';
 import UserAccount from './Pages/UserAccountPage';
+import PreviousOrdersPage from './Pages/PreviousOrdersPage';
 import ScrollToTop from './utils/ScrollToTop';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/tops" element={<TopsPage />} />
             <Route path="/order-success" element={<OrderSuccess />} />
             <Route path="/account" element={<UserAccount />} />
+            <Route path="/previous-orders" element={<PreviousOrdersPage />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
         </ScrollToTop>

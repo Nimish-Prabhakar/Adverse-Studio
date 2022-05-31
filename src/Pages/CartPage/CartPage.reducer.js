@@ -7,6 +7,7 @@ const initialState = {
   cartItemStatus: false,
   couponDiscountedValue: 0,
   couponPercentageValue: 0,
+  paymentUrl: '',
 };
 
 const cartPageReducer = (state = initialState, action) => {
@@ -48,6 +49,13 @@ const cartPageReducer = (state = initialState, action) => {
         ...state,
         couponDiscountedValue,
         couponPercentageValue,
+      };
+    }
+    case types.CART_CHECKOUT_API_SUCCESS: {
+      const { paymentUrl } = action;
+      return {
+        ...state,
+        paymentUrl,
       };
     }
     default:

@@ -94,9 +94,10 @@ export function* cartCheckoutSaga({ customer_id, coupon_code }) {
       const serverSideError = response.json;
       yield put({ type: types.CART_CHECKOUT_API_ERROR, serverSideError });
     } else {
-      console.log(response);
+      const paymentUrl = response.json.payment_url;
       yield put({
         type: types.CART_CHECKOUT_API_SUCCESS,
+        paymentUrl,
       });
     }
   } catch (error) {

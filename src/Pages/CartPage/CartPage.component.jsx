@@ -67,6 +67,7 @@ function CartPage() {
   const couponPercentageValue = useSelector(
     (state) => state.cartPageReducer.couponPercentageValue
   );
+  const paymentUrl = useSelector((state) => state.cartPageReducer.paymentUrl);
 
   const homePageHandler = (e) => {
     navigate('/');
@@ -87,30 +88,46 @@ function CartPage() {
   };
 
   const cartCheckoutHandler = (e) => {
+    setLoading(true);
     dispatch(cartCheckout(5));
   };
 
   useEffect(() => {
     dispatch(getCartItems(5));
-    setLoading(false);
   }, [deleteItemStatus, dispatch]);
 
   useEffect(() => {
+    setLoading(true);
     dispatch(getCartItems(5));
   }, [dispatch]);
 
   useEffect(() => {
     setCartItemsDetails(cartItems);
+    setLoading(false);
   }, [cartItems]);
 
   useEffect(() => {
-    console.log(couponDiscountedValue);
     if (couponDiscountedValue > 0) setPromoCodeApplied(true);
   }, [couponDiscountedValue, couponPercentageValue]);
 
+  useEffect(() => {
+    if (paymentUrl !== '') {
+      setLoading(false);
+      window.location.href = paymentUrl;
+    }
+  }, [paymentUrl, navigate]);
+
+  useEffect(() => {
+    if (cartItemStatus) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }, [cartItemStatus]);
+
   return (
     <>
-      {!cartItemStatus ? (
+      {loading ? (
         <Loader />
       ) : (
         <div className="cartPageWrapper">

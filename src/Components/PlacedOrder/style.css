@@ -1,0 +1,45 @@
+.placedOrderWrapper {
+  border-width: 1px;
+  border-style: solid;
+  margin-top: 20px;
+  border-radius: 15px;
+  width: 35%;
+  margin-left: 80px;
+}
+
+.placedOrderHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #edfbf9;
+  padding: 21px;
+  border-radius: 15px;
+}
+
+.placedOrderHeaderContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.placedOrderSubheader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+.placedOrderItems {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.placedOrderItemsImg {
+  height: 150px;
+}
