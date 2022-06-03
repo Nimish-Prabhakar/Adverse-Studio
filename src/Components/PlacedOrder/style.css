@@ -36,10 +36,17 @@
 .placedOrderItems {
   margin: 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
 }
 
 .placedOrderItemsImg {
   height: 150px;
+}
+
+.placedOrderItemsDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 20px;
 }

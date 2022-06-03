@@ -24,6 +24,9 @@ export const COUPON_CODE_API =
 export const CHECKOUT_API =
   'https://karkhana-studio-backend.onrender.com/api/v1/checkout';
 
+export const DELIVERY_DETAILS_API =
+  'https://karkhana-studio-backend.onrender.com/api/v1/customer';
+
 export const womenPageCategories = [
   'kaftans',
   'tops',

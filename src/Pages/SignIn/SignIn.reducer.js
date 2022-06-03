@@ -6,6 +6,7 @@ const initialState = {
   error: '',
   serverStatus: null,
   signInstatus: false,
+  signUpStatus: false,
   customer_id: 0,
 };
 
@@ -37,13 +38,15 @@ const signInPageReducer = (state = initialState, action) => {
       };
     }
     case types.SIGN_UP_SUCCESS: {
-      let { isSignedUp, isSignedIn } = state;
+      let { isSignedUp, isSignedIn, signUpStatus } = state;
       isSignedUp = true;
       isSignedIn = true;
+      signUpStatus = true;
       return {
         ...state,
         isSignedUp,
         isSignedIn,
+        signUpStatus,
       };
     }
     case types.SIGN_UP_ERROR: {

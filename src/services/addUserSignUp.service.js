@@ -10,6 +10,7 @@ const addUserSignUp = async (userDetails) => {
     first_name: userDetails.first_name,
     last_name: userDetails.last_name,
     password: userDetails.password,
+    phone_number: userDetails.phone_number,
   };
 
   try {

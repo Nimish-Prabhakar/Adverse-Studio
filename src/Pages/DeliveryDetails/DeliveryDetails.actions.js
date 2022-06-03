@@ -1,10 +1,12 @@
 import * as types from '../../constants/ActionTypes';
 
-export const deliveryDetailsEntered = (deliveryDetails) => ({
-  type: types.DELIVERY_DETAILS_ENTERED,
+export const addDeliveryDetails = (customer_id, deliveryDetails) => ({
+  type: types.ADD_DELIVERY_DETAILS,
+  customer_id,
   deliveryDetails,
 });
 
-export const signOutAction = () => ({
-  type: types.SIGN_OUT_SUCCESS,
+export const getDeliveryDetails = (customer_id) => ({
+  type: types.GET_DELIVERY_DETAILS,
+  customer_id,
 });

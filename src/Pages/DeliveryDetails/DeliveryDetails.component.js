@@ -3,9 +3,11 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addDeliveryDetails } from './DeliveryDetails.actions';
 import './style.css';
 import Alert from '@mui/material/Alert';
+import addUserAddress from '../../services/addUserAddress.service';
 
 const styles = {
   textField: {
@@ -28,6 +30,8 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 function DeliveryDetailsPage() {
+  const dispatch = useDispatch();
+
   const [deliveryDetails, setDeliveryDetails] = useState({
     email: '',
     fullName: '',
@@ -59,12 +63,13 @@ function DeliveryDetailsPage() {
     setDeliveryDetailsEntered(false);
   };
 
-  const deliveryDetailsSubmitHandler = (e) => {
+  const deliveryDetailsConfirmHandler = (e) => {
     e.preventDefault();
 
     if (isSignedIn) {
       delete deliveryDetails.fullName;
       delete deliveryDetails.email;
+      delete deliveryDetails.mobileNumber;
     }
 
     for (let [key, value] of Object.entries(deliveryDetails)) {
@@ -86,6 +91,19 @@ function DeliveryDetailsPage() {
     }
 
     setDeliveryDetailsEntered(true);
+  };
+
+  const deliveryDetailsSubmitHandler = () => {
+    const finalDeliveryDetails = {
+      address: deliveryDetails.houseNumber,
+      area: deliveryDetails.street,
+      landmark: deliveryDetails.landmark,
+      city: deliveryDetails.city,
+      state: deliveryDetails.state,
+      pincode: deliveryDetails.pincode,
+    };
+
+    dispatch(addUserAddress(5, finalDeliveryDetails));
   };
 
   return (
@@ -225,23 +243,25 @@ function DeliveryDetailsPage() {
                       },
                     }}
                   />
-                  <TextField
-                    id="standard-basic"
-                    label="Mobile Number"
-                    variant="standard"
-                    sx={styles.textField}
-                    value={deliveryDetails.mobileNumber}
-                    name="mobileNumber"
-                    onChange={deliveryDetailsInputHandler}
-                    inputProps={{
-                      autocomplete: 'Mobile Number',
-                      form: {
-                        autocomplete: 'off',
-                      },
-                    }}
-                  />
+                  {!isSignedIn && (
+                    <TextField
+                      id="standard-basic"
+                      label="Mobile Number"
+                      variant="standard"
+                      sx={styles.textField}
+                      value={deliveryDetails.mobileNumber}
+                      name="mobileNumber"
+                      onChange={deliveryDetailsInputHandler}
+                      inputProps={{
+                        autocomplete: 'Mobile Number',
+                        form: {
+                          autocomplete: 'off',
+                        },
+                      }}
+                    />
+                  )}
                   <ColorButton
-                    onClick={deliveryDetailsSubmitHandler}
+                    onClick={deliveryDetailsConfirmHandler}
                     variant="contained"
                   >
                     Save Delivery Details

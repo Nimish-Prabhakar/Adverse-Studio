@@ -6,6 +6,9 @@ const initialState = {
 
 const deliveryDetailsPageReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.GET_DELIVERY_DETAILS_SUCCESS: {
+      let { deliveryDetails } = state;
+    }
     default:
       return state;
   }

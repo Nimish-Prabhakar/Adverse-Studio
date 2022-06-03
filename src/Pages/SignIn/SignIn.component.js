@@ -17,6 +17,7 @@ import { MdPassword, MdAlternateEmail } from 'react-icons/md';
 import Alert from '@mui/material/Alert';
 import Loader from '../../Components/Loader';
 import ForgotPasswordModal from './ForgotPasswordModal';
+import { AiOutlinePhone } from 'react-icons/ai';
 import './style.css';
 
 const styles = {
@@ -44,6 +45,7 @@ function SignIn() {
     last_name: '',
     password: '',
     confirm_password: '',
+    phone_number: '',
   });
 
   const [signInUserDetails, setSignInUserDetails] = useState({
@@ -58,6 +60,7 @@ function SignIn() {
   const [emptyEmailError, setEmptyEmailError] = useState(false);
   const [emptyFnError, setEmptyFnError] = useState(false);
   const [emptyLnError, setEmptyLnError] = useState(false);
+  const [emptyPhone, setEmptyPhone] = useState(false);
   const [emptyPasswordError, setEmptyPasswordError] = useState(false);
   const [emptyConfirmPassError, setEmptyConfirmPassError] = useState(false);
   const [confirmPassMatch, setConfirmPassMatch] = useState(false);
@@ -67,6 +70,10 @@ function SignIn() {
 
   const signInstatus = useSelector(
     (state) => state.signInPageReducer.signInstatus
+  );
+
+  const signUpStatus = useSelector(
+    (state) => state.signInPageReducer.signUpStatus
   );
 
   const isSignedIn = useSelector((state) => state.signInPageReducer.isSignedIn);
@@ -155,12 +162,13 @@ function SignIn() {
   };
 
   useEffect(() => {
-    if (signInstatus) {
-      localStorage.setItem('isSignedIn', signInstatus);
+    if (signInstatus || signUpStatus) {
+      if (signInstatus) localStorage.setItem('isSignedIn', signInstatus);
+      if (signUpStatus) localStorage.setItem('isSignedIn', signUpStatus);
       setLoader(false);
       navigate('/');
     }
-  }, [signInstatus, isSignedIn, navigate]);
+  }, [signInstatus, signUpStatus, isSignedIn, navigate]);
 
   const signUpSubmitHandler = (e) => {
     e.preventDefault();
@@ -177,6 +185,13 @@ function SignIn() {
       return;
     } else {
       setEmptyLnError(false);
+    }
+
+    if (signUpUserDetails.phone_number.length === 0) {
+      setEmptyPhone(true);
+      return;
+    } else {
+      setEmptyPhone(false);
     }
 
     if (signUpUserDetails.email_id.length === 0) {
@@ -228,6 +243,7 @@ function SignIn() {
       last_name: signUpUserDetails.last_name,
       email_id: signUpUserDetails.email_id,
       password: signUpUserDetails.password,
+      phone_number: signUpUserDetails.phone_number,
     };
 
     setLoader(true);
@@ -272,6 +288,9 @@ function SignIn() {
             )}
             {emptyLnError && (
               <Alert severity="error">Please enter your last name</Alert>
+            )}
+            {emptyPhone && (
+              <Alert severity="error">Please enter your phone number</Alert>
             )}
             {emptyPasswordError && (
               <Alert severity="error">Please enter your password</Alert>
@@ -326,6 +345,24 @@ function SignIn() {
                     startAdornment: (
                       <InputAdornment position="start">
                         <FiUsers style={{ fontSize: '1.3rem' }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="standard"
+                />
+                <TextField
+                  sx={styles.typography}
+                  id="input-with-icon-textfield"
+                  placeholder="Phone Number"
+                  autoComplete="off"
+                  type="text"
+                  name="phone_number"
+                  value={signUpUserDetails.phone_number}
+                  onChange={signUpChangeHandler}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AiOutlinePhone style={{ fontSize: '1.3rem' }} />
                       </InputAdornment>
                     ),
                   }}
