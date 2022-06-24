@@ -3,6 +3,12 @@ import { BsFillHeartFill } from 'react-icons/bs';
 import { styled } from '@mui/material/styles';
 import singleProductImage from '../../assets/img/singleProductImage.jpeg';
 import singleProductImage2 from '../../assets/img/singleProductImage2.jpeg';
+import singleProduct3 from '../../assets/img/singleProduct3.jpeg';
+import singleProduct4 from '../../assets/img/singleProduct4.jpeg';
+import singleProduct5 from '../../assets/img/singleProduct5.jpeg';
+import signIn3 from '../../assets/img/signIn3.jpeg';
+import signIn4 from '../../assets/img/signIn4.jpeg';
+import categoryLeft from '../../assets/img/categoryLeft.jpeg';
 import { updateCartCountIncrement } from '../../Pages/CartPage/CartPage.actions';
 import { useDispatch } from 'react-redux';
 import Typography from '@mui/material/Typography';
@@ -41,8 +47,8 @@ function SingleProduct({
   const [assistanceShow, setAssistanceShow] = useState(false);
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
-  const [opacity, setOpcaity] = useState('');
   const [itemAddedCart, setItemAddedCart] = useState(false);
+  const [sizeSelection, setSizeSelection] = useState(false);
 
   const wishlistHandler = (e) => {
     setWishlist({ color: 'red' });
@@ -69,19 +75,14 @@ function SingleProduct({
   const colorSelectHandler = (color) => {
     setSelectedColor(color);
     userSelectedColor(color);
+    setSizeSelection(true);
   };
 
   const sizeSelectHandler = (size) => {
-    setSelectedSize(size);
-    userSelectedSize(size);
-  };
-
-  const cartHandler = () => {
-    dispatch(updateCartCountIncrement());
-    setItemAddedCart(true);
-    setTimeout(() => {
-      setItemAddedCart(false);
-    }, 3000);
+    if (sizeSelection) {
+      setSelectedSize(size);
+      userSelectedSize(size);
+    }
   };
 
   return (
@@ -142,7 +143,7 @@ function SingleProduct({
                   return (
                     <span
                       key={index}
-                      className={`${'size' + ' ' + opacity}`}
+                      className={sizeSelection ? 'size' : 'sizeSelection'}
                       onClick={() => sizeSelectHandler(size)}
                     >
                       {size}
@@ -248,32 +249,32 @@ function SingleProduct({
             />
             <img
               className="carouselImage"
-              src={singleProductImage2}
+              src={signIn3}
               alt="singleProductImage2"
             />
             <img
               className="carouselImage"
-              src={singleProductImage2}
+              src={signIn4}
               alt="singleProductImage2"
             />
             <img
               className="carouselImage"
-              src={singleProductImage2}
+              src={categoryLeft}
               alt="singleProductImage2"
             />
             <img
               className="carouselImage"
-              src={singleProductImage2}
+              src={singleProduct3}
               alt="singleProductImage2"
             />
             <img
               className="carouselImage"
-              src={singleProductImage2}
+              src={singleProduct4}
               alt="singleProductImage2"
             />
             <img
               className="carouselImage"
-              src={singleProductImage2}
+              src={singleProduct5}
               alt="singleProductImage2"
             />
           </Carousel>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import NykaaLogo from '../../assets/img/Nykaa_Logo.png';
+import NykaaLogo from '../../assets/img/fashion_demo.jpeg';
 import { AiOutlineSearch, AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Search from '../../Components/Search';

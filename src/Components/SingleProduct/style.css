@@ -106,6 +106,14 @@
   opacity: 0.5;
 }
 
+.sizeSelection {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  opacity: 0.5;
+  cursor: default;
+}
+
 .singleProductAddBtn {
   display: flex;
   justify-content: center;
@@ -140,4 +148,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.carousel .control-dots {
+  margin: 0;
 }
