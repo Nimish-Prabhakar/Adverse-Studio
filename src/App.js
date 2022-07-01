@@ -14,6 +14,7 @@ import UserAccount from './Pages/UserAccountPage';
 import PreviousOrdersPage from './Pages/PreviousOrdersPage';
 import ScrollToTop from './utils/ScrollToTop';
 import axios from 'axios';
+import addIP from './services/addIPAdress.service';
 
 function App() {
   const [ip, setIP] = useState('');
@@ -23,6 +24,13 @@ function App() {
     const res = await axios.get('https://geolocation-db.com/json/');
     console.log(res.data);
     setIP(res.data.IPv4);
+    addIP(res.data.IPv4, res.data.country_name, res.data.state)
+      .then((res) => {
+        console.log('successfully added ip');
+      })
+      .then((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {

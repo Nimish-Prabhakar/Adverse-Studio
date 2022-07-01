@@ -27,6 +27,14 @@ export const DELIVERY_DETAILS_API =
 export const WISHLIST_ITEMS_API =
   'https://karkhana-studio-backend.onrender.com/api/v1/customer';
 
+export const IP_API = 'https://adverse-back2.onrender.com/api/v1/ips/ips';
+
+export const WOMEN_CLICK_API =
+  'https://adverse-back2.onrender.com/api/v1/ips/women';
+
+export const DEAL_CLICK_API =
+  'https://adverse-back2.onrender.com/api/v1/ips/deal';
+
 export const womenPageCategories = [
   'kaftans',
   'tops',

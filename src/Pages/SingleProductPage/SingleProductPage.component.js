@@ -9,6 +9,7 @@ import { addCartItems } from '../CartPage/CartPage.actions';
 import Alert from '@mui/material/Alert';
 import Loader from '../../Components/Loader';
 import './SingleProductPage.style.css';
+import dealClick from '../../services/dealPageClick.service';
 
 function SingleProductPage() {
   const dispatch = useDispatch();
@@ -16,6 +17,16 @@ function SingleProductPage() {
   useEffect(() => {
     dispatch(getSingleProductDetails(9));
   }, [dispatch]);
+
+  useEffect(() => {
+    dealClick(true)
+      .then((resp) => {
+        console.log('clicked on women');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const selectedProductInfo = useSelector(
     (state) => state.singleProductPageReducer.productInfo

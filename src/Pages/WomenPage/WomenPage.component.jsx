@@ -4,6 +4,7 @@ import PreProductListing from '../../Components/PreProductListing';
 import { useDispatch, useSelector } from 'react-redux';
 import { womenPageCategories } from '../../constants/AppConstants';
 import { getAllProductsWomenPage } from './WomenPage.actions';
+import womenClick from '../../services/womenPageClick.service';
 import './WomenPage.style.css';
 
 function WomenPage() {
@@ -15,6 +16,16 @@ function WomenPage() {
   const allCategories = useSelector(
     (state) => state.womenPageReducer.individualCategories
   );
+
+  useEffect(() => {
+    womenClick(true)
+      .then((resp) => {
+        console.log('clicked on women');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const [productData, setProductData] = useState([]);
   const [categories, setCategories] = useState({});
