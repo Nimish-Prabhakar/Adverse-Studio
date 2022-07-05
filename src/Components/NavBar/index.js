@@ -3,10 +3,6 @@ import { NavLink } from 'react-router-dom';
 import NykaaLogo from '../../assets/img/fashion_demo.jpeg';
 import { AiOutlineSearch, AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import Search from '../../Components/Search';
-import Cart from '../Cart';
-import UserIcon from '../UserIcon';
-import WishlistIcon from '../WishlistIcon';
 import './style.css';
 
 function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
@@ -57,14 +53,7 @@ function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
             <img className="navLogo" src={NykaaLogo} alt="nyka-logo" />
           </NavLink>
         </div>
-        <div className="navIconsWrapper">
-          <div className="iconNav">
-            <Search />
-            <UserIcon />
-            <WishlistIcon size="25px" />
-            <Cart />
-          </div>
-        </div>
+        <div className="navIconsWrapper"></div>
       </div>
       <div className="mobileNavWrapper">
         <NavLink to="/">
@@ -72,7 +61,7 @@ function NavBar({ toggleMenuHandler, toggleSearch, searchDisplay }) {
         </NavLink>
         <AiOutlineSearch />
         <AiOutlineHeart />
-        <Cart />
+
         <GiHamburgerMenu
           className="hamburgerMenu"
           onClick={toggleMenuHandler}
