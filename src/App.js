@@ -13,7 +13,7 @@ function App() {
 
   //creating function to load ip address from the API
   const getData = async () => {
-    const res = await axios.get('http://lumtest.com/myip.json');
+    const res = await axios.get('https://lumtest.com/myip.json');
     setIP(res.data.ip);
     addIP(res.data.ip, res.data.country, res.data.geo.city);
   };
