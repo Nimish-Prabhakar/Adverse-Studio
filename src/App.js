@@ -9,12 +9,13 @@ import axios from 'axios';
 import addIP from './services/addIPAdress.service';
 
 function App() {
+  const [ip, setIP] = useState('');
+
   //creating function to load ip address from the API
   const getData = async () => {
-    const res = await axios.get('https://geolocation-db.com/json/');
-    console.log(res.data);
-
-    addIP(res.data.IPv4, res.data.country_name, res.data.state);
+    const res = await axios.get('http://lumtest.com/myip.json');
+    setIP(res.data.ip);
+    addIP(res.data.ip, res.data.country, res.data.geo.city);
   };
 
   useEffect(() => {
@@ -28,8 +29,8 @@ function App() {
         <NavigationBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/women" element={<WomenPage />} />
-          <Route path="/deals" element={<SingleProductPage />} />
+          <Route path="/women" element={<WomenPage getIp={ip} />} />
+          <Route path="/deals" element={<SingleProductPage getIp={ip} />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

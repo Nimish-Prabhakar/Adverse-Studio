@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import womenClick from '../../services/womenPageClick.service';
 
-function WomenPage() {
+function WomenPage({ getIp }) {
   useEffect(() => {
     womenClick(true)
       .then((resp) => {
-        console.log('clicked on women page');
+        console.log('clicked on women page', getIp);
       })
       .catch((err) => {
         console.log(err);
